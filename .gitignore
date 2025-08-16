@@ -205,3 +205,15 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Ignore generated API response files
+artifacts/
+
+# Ignore generated test reports
+reports/
+
+# Test Data
+test_data/
+
+# macOS
+.DS_Store

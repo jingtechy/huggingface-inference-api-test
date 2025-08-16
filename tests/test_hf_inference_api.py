@@ -94,9 +94,20 @@ def evaluate_response(model_output: str, expected_answers: List[str]) -> Dict[st
 def test_text_generation(config: Dict[str, Any], artifacts_dir: pathlib.Path, qa_pair: Tuple[str, str,List[str]]) -> None:
     context, question, expected_answers = qa_pair
     
-    # Create client directly
-    load_dotenv()  # read .env file
-    token = os.getenv("HF_TOKEN") 
+    # Load local .env if exists
+    env_path = pathlib.Path(".env")
+    if env_path.exists():
+        load_dotenv(dotenv_path=env_path)
+    
+    # Get token from environment either local .env or Actions secret in Github Actions
+    token = os.getenv("HF_TOKEN")
+
+    # Strip whitespace and ensure it's not a placeholder
+    if token:
+        token = token.strip()
+    if not token or token == "***":
+        pytest.skip("HF_TOKEN not set or is placeholder, skipping test") 
+
     client = InferenceClient(
         token=token,  
         timeout=config.get("timeout_seconds", 30),

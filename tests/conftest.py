@@ -21,7 +21,6 @@ def config() -> Dict[str, Any]:
         data = yaml.safe_load(f)
     # env overrides
     data["model"] = os.getenv("HF_MODEL", data.get("model"))
-    data["token"] = os.getenv("HF_TOKEN", data.get("token", ""))
     data["timeout_seconds"] = int(os.getenv("HF_TIMEOUT", data.get("timeout_seconds", 30)))
     data["artifact_dir"] = os.getenv("HF_ARTIFACT_DIR", data.get("artifact_dir", "artifacts"))
     data["report_dir"] = os.getenv("HF_REPORT_DIR", data.get("report_dir", "reports"))

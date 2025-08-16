@@ -212,8 +212,5 @@ artifacts/
 # Ignore generated test reports
 reports/
 
-# Test Data
-test_data/
-
 # macOS
 .DS_Store

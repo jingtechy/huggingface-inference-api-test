@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 import pathlib
 import shutil
+import random
 import re
 from typing import Dict, Any, List, Tuple
 
@@ -18,10 +19,10 @@ def load_test_inputs() -> List[Tuple[str, List[str]]]:
     
     if not test_data_path.exists():
         # Fallback to hardcoded inputs if JSON file not found
-        return [
-            ("Hello from Hugging Face Inference API!", ["hello", "hugging face"]),
-            ("Write a short poem about the ocean.", ["ocean", "poem"]),
-            ("Who wrote Hamlet?", ["William Shakespeare"])
+        fallback_inputs = [
+            ("What is the capital of France?", ["Paris"]),
+            ("Which planet is known as the Red Planet?", ["Mars", "the Red Planet"]),
+            ("Who wrote Hamlet?", ["William Shakespeare", "Shakespeare"])
         ]
     
     with test_data_path.open("r", encoding="utf-8") as f:
@@ -43,14 +44,14 @@ def load_test_inputs() -> List[Tuple[str, List[str]]]:
                         if expected_answers:  # Only include questions with answers
                             # pack as (context, question, expected_answers)
                             qa_pairs.append((context, qa["question"], expected_answers))
-                            if len(qa_pairs) >= 2: 
-                                return qa_pairs  # collect 2 questions
-    
-    return qa_pairs if qa_pairs else [
-        ("Hello from Hugging Face Inference API!", ["hello", "hugging face"]),
-        ("Write a short poem about the ocean.", ["ocean", "poem"]),
-        ("Who wrote Hamlet?", ["William Shakespeare"])
-    ]
+                            #if len(qa_pairs) >= 2: 
+                                #return qa_pairs  # collect 2 questions always from top
+
+    # If we have valid QA pairs, pick 2 randomly; otherwise use fallback 
+    if qa_pairs:
+        return random.sample(qa_pairs, k=min(2, len(qa_pairs)))   
+    else:   
+        return fallback_inputs                 
 
 
 def evaluate_response(model_output: str, expected_answers: List[str]) -> Dict[str, float]:

@@ -3,7 +3,7 @@
 # Model to use for inference
 model: deepset/roberta-base-squad2
 task: question_answering
-task_short: qa
+task_short: QA
 provider: hf-inference
 
 # Request timeout in seconds

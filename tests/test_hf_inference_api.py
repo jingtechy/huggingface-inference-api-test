@@ -102,8 +102,8 @@ def prepare_artifacts(artifacts_dir):
     return artifacts_path
   
 
-@pytest.mark.parametrize("qa_pair", load_test_inputs(), ids=lambda v: f"q_{len(v[0])}")
-def test_text_generation(config: Dict[str, Any], artifacts_dir: pathlib.Path, qa_pair: Tuple[str, str,List[str]]) -> None:
+@pytest.mark.parametrize("qa_pair", load_test_inputs(), ids=lambda v: "QA_" + re.sub(r'[^a-zA-Z0-9_]', '_', v[0][:15]))
+def test_question_answering(config: Dict[str, Any], artifacts_dir: pathlib.Path, qa_pair: Tuple[str, str,List[str]]) -> None:
     context, question, expected_answers = qa_pair
     
     # Load local .env if exists

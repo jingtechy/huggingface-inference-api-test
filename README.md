@@ -1,4 +1,4 @@
-# huggingface-inference-api-test
+# Hugging Face Inference API Test
 
 Pytest automation for Hugging Face Inference API.
 
@@ -32,6 +32,32 @@ Pytest automation for Hugging Face Inference API.
 - Configurable via `config.yml` and environment variables.  
 - Supports **custom model parameters** like temperature, max tokens, etc.  
 - Easy to extend for new models, tasks, or evaluation metrics.
+
+## Continuous Integration (CI)
+
+This project uses **GitHub Actions** for Continuous Integration. The workflow automatically runs tests whenever code is pushed or a pull request is created.
+
+### Workflow Status
+
+![CI Status](https://github.com/jingtechy/huggingface-inference-api-test/actions/workflows/ci.yml/badge.svg)
+
+### Details
+
+- **Workflow file:** `.github/workflows/ci.yml`
+- **Runs on:** Push to main and feature branches and on Pull Requests
+- **Tasks included:** 
+  - **Checkout repository** – Retrieves the latest code from the repository
+  - **Cache pip dependencies** – Speeds up workflow runs by caching Python packages
+  - **Set up Python** – Installs Python 3.13 on the runner
+  - **Install dependencies** – Installs all required packages from `requirements.txt`
+  - **Run tests**:
+   - **Fast feedback** on push events: Runs pytest with a maximum of 1 failure (`--maxfail=1`) for quick feedback
+   - **Full test run** on pull requests: Runs all tests without early exit
+  - **Generate test reports**:
+   - **HTML report** (`reports/report.html`)
+   - **JUnit XML report** (`reports/junit.xml`)
+   - **Summary Markdown** (`reports/summary.md`)
+  - **Upload artifacts** – Stores reports as GitHub Actions artifacts for later download and inspection 
 
 ## Requirements
 - Python 3.9+

@@ -1,8 +1,10 @@
 import json
 import hashlib
+from _pytest import config
 from dotenv import load_dotenv
 import os
 import pathlib
+import shutil
 import re
 from typing import Dict, Any, List, Tuple
 
@@ -90,6 +92,16 @@ def evaluate_response(model_output: str, expected_answers: List[str]) -> Dict[st
     }
 
 
+@pytest.fixture(scope="session", autouse=True)
+def prepare_artifacts(artifacts_dir):
+    """Clear artifacts folder once at the beginning of the test session."""
+    artifacts_path = pathlib.Path(artifacts_dir)
+    if artifacts_path.exists():
+        shutil.rmtree(artifacts_path)
+    artifacts_path.mkdir(parents=True, exist_ok=True)
+    return artifacts_path
+  
+
 @pytest.mark.parametrize("qa_pair", load_test_inputs(), ids=lambda v: f"q_{len(v[0])}")
 def test_text_generation(config: Dict[str, Any], artifacts_dir: pathlib.Path, qa_pair: Tuple[str, str,List[str]]) -> None:
     context, question, expected_answers = qa_pair
@@ -128,14 +140,28 @@ def test_text_generation(config: Dict[str, Any], artifacts_dir: pathlib.Path, qa
     assert evaluation_results["accuracy"] >= 0.0, f"Accuracy too low: {evaluation_results['accuracy']}"
     assert evaluation_results["f1"] >= 0.0, f"F1 score too low: {evaluation_results['f1']}"
 
-    # Save result for later inspection
-    filename_stem = hashlib.sha256((context + question).encode("utf-8")).hexdigest()[:12]
-    output_path = artifacts_dir / f"textgen_{filename_stem}.json"
+    save_api_test_result(config, question, expected_answers, output_text, evaluation_results, artifacts_dir)
+  
+
+def save_api_test_result(config, question, expected_answers, output_text, evaluation_results, artifacts_dir):
+    """Save test results to the artifacts folder with meaningful filenames."""
+    artifacts_path = pathlib.Path(artifacts_dir)
+    if not artifacts_path.exists():
+        artifacts_path.mkdir(parents=True, exist_ok=True)
+
+    # Use part of the task + question + hash for uniqueness
+    task_short = config.get("task_short")
+    question_fragment = make_meaningful_filename(question, 40)
+    short_hash = hashlib.sha256((question).encode("utf-8")).hexdigest()[:6]   
+
+    filename = f"{task_short}_{question_fragment}_{short_hash}.json"
+    output_path = artifacts_path / filename
+
     with output_path.open("w", encoding="utf-8") as f:
         json.dump(
             {
                 "model": config.get("model"),
-                "task": "question_answering",  
+                "task": config.get("task"),
                 "input": question,
                 "expected_answers": expected_answers,
                 "output": output_text,
@@ -145,3 +171,10 @@ def test_text_generation(config: Dict[str, Any], artifacts_dir: pathlib.Path, qa
             ensure_ascii=False,
             indent=2,
         )
+
+def make_meaningful_filename(question: str, max_len: int = 40) -> str:
+    """Create a meaningful, filesystem-safe filename from the question."""
+    # Replace invalid characters with underscore
+    safe = "".join(c if c.isalnum() else "_" for c in question).strip("_")
+    return safe[:max_len].rstrip("_")
+  

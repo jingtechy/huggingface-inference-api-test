@@ -1,9 +1,12 @@
 # Project configuration for Hugging Face Inference API automation tests
 
 # Model to use for inference
-model: deepset/roberta-base-squad2
-task: question_answering
-task_short: QA
+model1: deepset/roberta-base-squad2
+model2: distilbert/distilbert-base-uncased-finetuned-sst-2-english
+task1: question_answering
+task1_short: QA
+task2: sentiment_analysis
+task2_short: SA
 provider: hf-inference
 
 # Request timeout in seconds

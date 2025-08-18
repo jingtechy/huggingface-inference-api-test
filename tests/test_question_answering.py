@@ -4,7 +4,6 @@ from _pytest import config
 from dotenv import load_dotenv
 import os
 import pathlib
-import shutil
 import random
 import re
 from typing import Dict, Any, List, Tuple
@@ -13,7 +12,7 @@ import pytest
 from huggingface_hub import InferenceClient
 
 from tests.conftest import artifacts_dir, reports_dir
-from tests.generate_markdown_report_qa import generate_markdown_summary
+from tests.generate_markdown_report_qa import generate_markdown_summary_qa
 
 
 def load_test_inputs() -> List[Tuple[str, List[str]]]:
@@ -107,16 +106,6 @@ def evaluate_response(prediction: str, expected_answers: List[str], is_impossibl
         "exact_match": em,
         "f1": f1
     }    
-
-
-@pytest.fixture(scope="session", autouse=True)
-def prepare_artifacts(artifacts_dir):
-    """Clear artifacts folder once at the beginning of the test session."""
-    artifacts_path = pathlib.Path(artifacts_dir)
-    if artifacts_path.exists():
-        shutil.rmtree(artifacts_path)
-    artifacts_path.mkdir(parents=True, exist_ok=True)
-    return artifacts_path
   
 
 @pytest.mark.parametrize("qa_pair", load_test_inputs(), ids=lambda v: "QA_" + re.sub(r'[^a-zA-Z0-9_]', '_', v[0][:15]))
@@ -145,7 +134,7 @@ def test_question_answering(config: Dict[str, Any], artifacts_dir: pathlib.Path,
     
     # question_answering() calls the Hugging Face Inference API to answer the question based on the context
     # It sends an HTTP request to the model and returns the AI-generated response
-    result = client.question_answering(model=config["model"], question=question, context=context)
+    result = client.question_answering(model=config["model1"], question=question, context=context)
     raw_output = result.answer if isinstance(result, dict) else ""
     output = raw_output if isinstance(raw_output, str) else str(raw_output) # Make sure output always return a (or empty) string
     
@@ -162,7 +151,7 @@ def save_api_test_result(config, question, expected_answers, output, evaluation_
         artifacts_path.mkdir(parents=True, exist_ok=True)
 
     # Use part of the task + question + hash for uniqueness
-    task_short = config.get("task_short")
+    task_short = config.get("task1_short")
     question_fragment = make_meaningful_filename(question, 40)
     short_hash = hashlib.sha256((question).encode("utf-8")).hexdigest()[:6]   
 
@@ -172,8 +161,8 @@ def save_api_test_result(config, question, expected_answers, output, evaluation_
     with output_path.open("w", encoding="utf-8") as f:
         json.dump(
             {
-                "model": config.get("model"),
-                "task": config.get("task"),
+                "model": config.get("model1"),
+                "task": config.get("task1"),
                 "is_impossible": is_impossible,
                 "input": question,
                 "expected_answers": expected_answers,
@@ -193,7 +182,7 @@ def make_meaningful_filename(question: str, max_len: int = 40) -> str:
 
 # Create markdown summary report  
 @pytest.mark.order("last")
-def test_generate_markdown_summary(config, artifacts_dir, reports_dir):
-    md_path = reports_dir / "summary.md"
-    generate_markdown_summary(artifacts_dir, md_path)
-    assert md_path.exists(), "summary.md should be generated"
+def test_generate_markdown_summary_qa(config, artifacts_dir, reports_dir):
+    md_path = reports_dir / "summary_qa.md"
+    generate_markdown_summary_qa(artifacts_dir, md_path)
+    assert md_path.exists(), "summary_qa.md should be generated"

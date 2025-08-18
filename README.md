@@ -60,7 +60,7 @@ This project uses **GitHub Actions** for Continuous Integration. The workflow au
   - **Upload artifacts** – Stores reports as GitHub Actions artifacts for later download and inspection 
 
 ## Requirements
-- Python 3.9+
+- Python 3.11
 - A Hugging Face token with Inference API access (set `HF_TOKEN`)
 
 ## Quickstart
@@ -73,19 +73,21 @@ This project uses **GitHub Actions** for Continuous Integration. The workflow au
      ```bash
      $env:HF_TOKEN="hf_xxx_your_token_here"
      ```
-2. Create virtual environment and install dependencies:
+2. Install Python 3.11 using Homebrew  
+     ```bash
+     brew install python@3.11
+     ```   
+3. Create virtual environment and install dependencies:
    ```bash
-   python3 -m venv .venv
+   python3.11 -m venv .venv
    source .venv/bin/activate
    pip install -r requirements.txt
    ```
-
-3. Run tests:
+4. Run tests:
    ```bash
    pytest -q
    ```
-
-4. View results:
+5. View results:
    - Open `reports/report.html` for the HTML report
    - Check `reports/summary.md` for the Markdown summary
    - API outputs are saved in `artifacts/`

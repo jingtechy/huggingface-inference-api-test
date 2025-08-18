@@ -3,21 +3,18 @@ import json
 import pathlib
 from typing import Iterable
 
-import pytest
-
-from tests.conftest import config
-
-
 def _sanitize_markdown_cell(text: str) -> str:
     # Replace pipe to avoid breaking Markdown table cells
     return text.replace("|", "&#124;")
 
-def generate_markdown_summary_qa(artifacts_dir: pathlib.Path, report_path: pathlib.Path) -> None:
+def generate_markdown_summary_sa(artifacts_dir: pathlib.Path, report_path: pathlib.Path) -> None:
     artifacts_dir.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
 
     items: list[dict] = []
-    total_em = 0.0
+    total_accuracy = 0.0
+    total_precision = 0.0
+    total_recall = 0.0
     total_f1 = 0.0
     total_tests = 0
     
@@ -25,63 +22,66 @@ def generate_markdown_summary_qa(artifacts_dir: pathlib.Path, report_path: pathl
         try:
             with path.open("r", encoding="utf-8") as f:
                 data = json.load(f)
-            
-            # filter only those with task == "question_answering"
-            if data.get("task") != "question_answering":
-                continue
+
+            # filter only those with task == "sentiment_analysis"
+            if data.get("task") != "sentiment_analysis":
+                continue    
             
             # Extract evaluation metrics if available
             evaluation = data.get("evaluation", {})
-            em = evaluation.get("exact_match", 0.0)
+            accuracy = evaluation.get("accuracy", 0.0)
+            precision = evaluation.get("precision", 0.0)
+            recall = evaluation.get("recall", 0.0)
             f1 = evaluation.get("f1", 0.0)
             
             # Accumulate totals for averaging
-            total_em += em
+            total_accuracy += accuracy
+            total_precision += precision
+            total_recall += recall
             total_f1 += f1
             total_tests += 1
 
             def _truncate(text: str, max_len: int) -> str:
-             return text if len(text) <= max_len else text[:max_len] + "…"
+                return text if len(text) <= max_len else text[:max_len] + "…"
             
-            # Truncated long text (input, expected_answers, output) to a reasonable length
-            # Converted lists to comma-separated strings for input and expected_answers, so the table can render them as text
+            # Truncate long text fields
             items.append({
-                #"file": path.name,
                 "model": data.get("model"),
                 "task": data.get("task"),
-                "unanswerable": data.get("is_impossible"),
-                "input": _truncate(str(data.get("input", "")).replace("\n", " "), 200),
-                "expected_answers": _truncate(", ".join(data.get("expected_answers", [])) if isinstance(data.get("expected_answers", []), list) else str(data.get("expected_answers", "")), 80),
-                "output": _truncate(str(data.get("output", "")).replace("\n", " "), 200),
-                "em": f"{em:.3f}",
+                "input": _truncate(str(data.get("input", "")).replace("\n", " "), 100),
+                "expected": data.get("expected"),
+                "output": data.get("output"),
+                "accuracy": f"{accuracy:.3f}",
+                "precision": f"{precision:.3f}",
+                "recall": f"{recall:.3f}",
                 "f1": f"{f1:.3f}"
             })
         except Exception:
             continue
 
     lines: list[str] = []
-    lines.append(f"# Question Answering Test Summary — {_dt.datetime.now().isoformat(timespec='seconds')}\n")
+    lines.append(f"# Sentiment Analysis Test Summary — {_dt.datetime.now().isoformat(timespec='seconds')}\n")
     
     if not items:
         lines.append("No artifacts were found.\n")
     else:
         # Calculate averages
-        avg_em = total_em / total_tests if total_tests > 0 else 0.0
+        avg_accuracy = total_accuracy / total_tests if total_tests > 0 else 0.0
+        avg_precision = total_precision / total_tests if total_tests > 0 else 0.0
+        avg_recall = total_recall / total_tests if total_tests > 0 else 0.0
         avg_f1 = total_f1 / total_tests if total_tests > 0 else 0.0
         
         # Summary statistics
         lines.append("## Summary Statistics\n")
         lines.append(f"- **Total Tests**: {total_tests}\n")
-        lines.append(f"- **Average Exact Match**: {avg_em:.3f}\n")
+        lines.append(f"- **Average Accuracy**: {avg_accuracy:.3f}\n")
+        lines.append(f"- **Average Precision**: {avg_precision:.3f}\n")
+        lines.append(f"- **Average Recall**: {avg_recall:.3f}\n")
         lines.append(f"- **Average F1 Score**: {avg_f1:.3f}\n\n")
 
-        # After collecting all items
+        # Sort items
         items.sort(key=lambda x: (x["task"], x["model"]))
-        
-        # No wrap at all so show one line all together
-        def _no_wrap(text: str) -> str:
-            return text.replace(" ", "&nbsp;") # Replace spaces with non-breaking spaces to keep words together
-        
+
         # Wrap after every 5 words
         def _soft_wrap(text: str, words_per_line: int = 5) -> str:
           words = text.split()
@@ -90,27 +90,19 @@ def generate_markdown_summary_qa(artifacts_dir: pathlib.Path, report_path: pathl
              for i in range(0, len(words), words_per_line)
           ]
           return "\u200b".join(chunks) # allow wrapping only between chunks
-          
-        
+
         # Detailed results table
         lines.append("## Detailed Results\n")
-        lines.append("| Model | Task | Unanswerable | Input | Expected Answers | Output | Exact Match | F1 Score |\n")
-        lines.append("|---|---|---|---|---|---|---|---|\n")
+        lines.append("| Model | Task | Input | Expected | Output | Accuracy | Precision | Recall | F1 Score |\n")
+        lines.append("|---|---|---|---|---|---|---|---|---|\n")
 
         for it in items:
             model = str(it['model'])
             task = str(it['task'])
-            unanswerable = it['unanswerable']
-
             input_cell = _soft_wrap(_sanitize_markdown_cell(it['input']))
-            expected_answers = _soft_wrap(_sanitize_markdown_cell(it['expected_answers']))
-            output_cell = _soft_wrap(_sanitize_markdown_cell(it['output']))
-
-            em = it['em']
-            f1 = it['f1']
-            lines.append(f"| {model} | {task} | {unanswerable} | {input_cell} | {expected_answers} | {output_cell} | {em} | {f1} |\n")
+            expected_cell = str(it['expected'])
+            output_cell = str(it['output'])
+            lines.append(f"| {model} | {task} | {input_cell} | {expected_cell} | {output_cell} | {it['accuracy']} | {it['precision']} | {it['recall']} | {it['f1']} |\n")
 
     with report_path.open("w", encoding="utf-8") as f:
         f.writelines(lines)
-
-  

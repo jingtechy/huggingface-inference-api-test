@@ -3,20 +3,21 @@ import json
 import pathlib
 from typing import Iterable
 
+import pytest
+
+from tests.conftest import config
+
 
 def _sanitize_markdown_cell(text: str) -> str:
     # Replace pipe to avoid breaking Markdown table cells
     return text.replace("|", "&#124;")
-
 
 def generate_markdown_summary(artifacts_dir: pathlib.Path, report_path: pathlib.Path) -> None:
     artifacts_dir.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
 
     items: list[dict] = []
-    total_accuracy = 0.0
-    total_precision = 0.0
-    total_recall = 0.0
+    total_em = 0.0
     total_f1 = 0.0
     total_tests = 0
     
@@ -27,15 +28,11 @@ def generate_markdown_summary(artifacts_dir: pathlib.Path, report_path: pathlib.
             
             # Extract evaluation metrics if available
             evaluation = data.get("evaluation", {})
-            accuracy = evaluation.get("accuracy", 0.0)
-            precision = evaluation.get("precision", 0.0)
-            recall = evaluation.get("recall", 0.0)
+            em = evaluation.get("exact_match", 0.0)
             f1 = evaluation.get("f1", 0.0)
             
             # Accumulate totals for averaging
-            total_accuracy += accuracy
-            total_precision += precision
-            total_recall += recall
+            total_em += em
             total_f1 += f1
             total_tests += 1
 
@@ -49,12 +46,10 @@ def generate_markdown_summary(artifacts_dir: pathlib.Path, report_path: pathlib.
                 "model": data.get("model"),
                 "task": data.get("task"),
                 "unanswerable": data.get("is_impossible"),
-                "input": _truncate(", ".join(data.get("input", [])) if isinstance(data.get("input", []), list) else str(data.get("input", "")), 80),
+                "input": _truncate(str(data.get("input", "")).replace("\n", " "), 200),
                 "expected_answers": _truncate(", ".join(data.get("expected_answers", [])) if isinstance(data.get("expected_answers", []), list) else str(data.get("expected_answers", "")), 80),
                 "output": _truncate(str(data.get("output", "")).replace("\n", " "), 200),
-                "accuracy": f"{accuracy:.3f}",
-                "precision": f"{precision:.3f}",
-                "recall": f"{recall:.3f}",
+                "em": f"{em:.3f}",
                 "f1": f"{f1:.3f}"
             })
         except Exception:
@@ -67,17 +62,13 @@ def generate_markdown_summary(artifacts_dir: pathlib.Path, report_path: pathlib.
         lines.append("No artifacts were found.\n")
     else:
         # Calculate averages
-        avg_accuracy = total_accuracy / total_tests if total_tests > 0 else 0.0
-        avg_precision = total_precision / total_tests if total_tests > 0 else 0.0
-        avg_recall = total_recall / total_tests if total_tests > 0 else 0.0
+        avg_em = total_em / total_tests if total_tests > 0 else 0.0
         avg_f1 = total_f1 / total_tests if total_tests > 0 else 0.0
         
         # Summary statistics
         lines.append("## Summary Statistics\n")
         lines.append(f"- **Total Tests**: {total_tests}\n")
-        lines.append(f"- **Average Accuracy**: {avg_accuracy:.3f}\n")
-        lines.append(f"- **Average Precision**: {avg_precision:.3f}\n")
-        lines.append(f"- **Average Recall**: {avg_recall:.3f}\n")
+        lines.append(f"- **Average Exact Match**: {avg_em:.3f}\n")
         lines.append(f"- **Average F1 Score**: {avg_f1:.3f}\n\n")
 
         # After collecting all items
@@ -99,8 +90,8 @@ def generate_markdown_summary(artifacts_dir: pathlib.Path, report_path: pathlib.
         
         # Detailed results table
         lines.append("## Detailed Results\n")
-        lines.append("| Model | Task | Unanswerable | Input | Expected Answers | Output | Accuracy | Precision | Recall | F1 |\n")
-        lines.append("|---|---|---|---|---|---|---|---|---|---|\n")
+        lines.append("| Model | Task | Unanswerable | Input | Expected Answers | Output | Exact Match | F1 Score |\n")
+        lines.append("|---|---|---|---|---|---|---|---|\n")
 
         for it in items:
             model = _sanitize_markdown_cell(str(it['model']))
@@ -111,11 +102,11 @@ def generate_markdown_summary(artifacts_dir: pathlib.Path, report_path: pathlib.
             expected_answers = _soft_wrap(_sanitize_markdown_cell(it['expected_answers']))
             output_cell = _soft_wrap(_sanitize_markdown_cell(it['output']))
 
-            accuracy = it['accuracy']
-            precision = it['precision']
-            recall = it['recall']
+            em = it['em']
             f1 = it['f1']
-            lines.append(f"| {model} | {task} | {unanswerable} | {input_cell} | {expected_answers} | {output_cell} | {accuracy} | {precision} | {recall} | {f1} |\n")
+            lines.append(f"| {model} | {task} | {unanswerable} | {input_cell} | {expected_answers} | {output_cell} | {em} | {f1} |\n")
 
     with report_path.open("w", encoding="utf-8") as f:
         f.writelines(lines)
+
+  

@@ -1,6 +1,6 @@
 # Hugging Face Inference API Test
 
-Pytest automation for Hugging Face Inference API.
+This project enables testing AI models using the Hugging Face Inference API and evaluating their performance with standard metrics. Users can run model predictions, calculate metrics such as accuracy, precision, recall, and F1-score, and generate detailed reports.
 
 # Features
 

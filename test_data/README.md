@@ -1,4 +1,4 @@
-# Test Data for QA Models (SQuAD 2.0 Format)
+# Test Data for Question Answering Model (SQuAD 2.0 Format)
 
 This folder contains a sample dataset in **SQuAD 2.0 JSON format** for testing question-answering (QA) models. It is suitable for evaluating the performance of NLP models on reading comprehension tasks, including handling **answerable** and **unanswerable** questions.
 

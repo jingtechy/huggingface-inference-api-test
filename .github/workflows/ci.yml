@@ -21,7 +21,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Clean up Docker
+      - name: Pre-clean Docker
         run: docker system prune -af
 
       # Setup Docker Buildx
@@ -29,8 +29,14 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       # Build both app and test images and start the test container
-      - name: Build images and run tests
-        run: docker compose up --build --exit-code-from test test
+      # - name: Build images and run tests
+        # run: docker compose up --build --exit-code-from test test
+      
+      # Bild test image only and run tests in test container
+      - name: Build test image and run tests
+        run: |
+          docker compose build test
+          docker compose up --abort-on-container-exit test 
 
       # Copy test reports from test container
       - name: Copy test reports

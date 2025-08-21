@@ -6,10 +6,10 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Stage 2: App image
+# Stage 2: FastAPI App image
 FROM base AS app
 # Copy everything except what's ignored
-COPY . .
+# COPY . .
 # Disable Python output buffering, so logs appear immediately
 ENV PYTHONUNBUFFERED=1
 # Default command to run FastAPI app when container starts
@@ -18,7 +18,7 @@ CMD ["python", "app.py"]
 # Stage 3: Test image
 FROM base AS test
 # Copy everything except what's ignored
-COPY . .
+# COPY . .
 # Disable Python output buffering
 ENV PYTHONUNBUFFERED=1
 # Default command to run tests when container starts

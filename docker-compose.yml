@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: app      # Use Dockerfile app stage
+      target: app      # Use app image from Dockerfile 
     container_name: huggingface-inference-api
     ports:
       - "8000:8000"
@@ -25,18 +25,27 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: test   # Use Dockerfile test stage
+      target: test   # Use test image from Dockerfile 
     container_name: huggingface-inference-api-test
-    depends_on:
-      app:
-        condition: service_healthy
+    #depends_on:
+      #app:
+        #condition: service_healthy
     command: >
-      pytest --disable-warnings -q
-             --junitxml=reports/junit.xml
-             --html=reports/report.html
-             --self-contained-html
+      bash -c "
+        # Start FastAPI in the background
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 & 
+        # Wait a few seconds for FastAPI to start
+        sleep 5
+        # Run tests
+        pytest --disable-warnings -q \
+               --junitxml=reports/junit.xml \
+               --html=reports/report.html \
+               --self-contained-html
+      "
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
-    #   - .:/app   # Mount local project code
+      - .:/app   # Mount local project code directly from repo, so no need FastAPI app container/image
       - ./test_data:/app/test_data  # Mount test data separately
+    ports:
+      - "8000:8000"  # Optional: expose FastAPI port if needed  

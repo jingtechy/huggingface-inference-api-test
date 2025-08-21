@@ -37,6 +37,6 @@ services:
              --self-contained-html
     environment:
       - PYTHONUNBUFFERED=1
-    # volumes:
+    volumes:
     #   - .:/app   # Mount local project code
-    #   - ./test_data:/app/test_data  # Mount test data separately
+      - ./test_data:/app/test_data  # Mount test data separately

@@ -20,6 +20,9 @@ jobs:
       # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: Clean up Docker
+        run: docker system prune -af
 
       # Setup Docker Buildx
       - name: Set up Docker Buildx

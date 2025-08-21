@@ -31,4 +31,4 @@ htmlcov/
 node_modules/
 
 # Ignore test_data in app image if you want
-#test_data/
+test_data/

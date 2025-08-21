@@ -19,8 +19,6 @@ CMD ["python", "app.py"]
 FROM base AS test
 # Copy everything except what's ignored
 COPY . .
-# Explicitly copy test_data, even if it's in .dockerignore
-COPY test_data ./test_data
 # Disable Python output buffering
 ENV PYTHONUNBUFFERED=1
 # Default command to run tests when container starts

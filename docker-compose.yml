@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  # FastAPI app container
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: app      # Use app image from Dockerfile 
+    container_name: huggingface-inference-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Mount local project code in dev mode
+    # volumes:
+    #   - .:/app
+
+  # Test container
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test   # Use test image from Dockerfile 
+    container_name: huggingface-inference-api-test
+    #depends_on:
+      #app:
+        #condition: service_healthy
+    command: >
+     bash -c "
+       uvicorn app:app --reload --host 0.0.0.0 --port 8000 &
+       
+       # Wait until FastAPI responds
+       for i in {1..20}; do
+         curl -s http://localhost:8000/docs && break
+         echo 'Waiting for FastAPI...'
+         sleep 1
+       done
+
+       # If still not ready, exit with error
+       if ! curl -s http://localhost:8000/docs; then
+         echo 'FastAPI did not start!'
+         exit 1
+       fi
+
+       # Run tests
+       pytest --disable-warnings -q --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
+     "
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app   # Mount local project code directly from repo, so no need FastAPI app container/image
+      - ./test_data:/app/test_data  # Mount test_data folder separately
+      - ./reports:/app/reports  # Mount reports folder separately
+    ports:
+      - "8000:8000"  # Optional: expose FastAPI port if needed  

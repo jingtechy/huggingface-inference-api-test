@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 import os
 
 from huggingface_hub import InferenceClient
+import requests
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 from tests.conftest import artifacts_dir, reports_dir
@@ -52,7 +53,7 @@ def load_test_inputs() -> List[Tuple[str, str]]:
 def test_sentiment_analysis(config: Dict[str, Any], artifacts_dir: pathlib.Path, row: Tuple[str, str]) -> None:
     sentence, true_label = row
 
-    # Load env
+    """ # Load env
     env_path = pathlib.Path(".env")
     if env_path.exists():
         load_dotenv(dotenv_path=env_path)
@@ -74,8 +75,21 @@ def test_sentiment_analysis(config: Dict[str, Any], artifacts_dir: pathlib.Path,
     result = client.text_classification(
     model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
     text=sentence)
+    pred_label = result[0]["label"].lower() if isinstance(result, list) and result else "unknown" """
 
-    pred_label = result[0]["label"].lower() if isinstance(result, list) and result else "unknown"
+    # FastAPI local URL
+    base_url = config.get("local_api_url", "http://localhost:8000")
+    sentiment_url = f"{base_url}/predict/sentiment"
+
+    # Send Post request to FastAPI Sentiment Analysis API
+    payload = {"text": sentence}
+    response = requests.post(sentiment_url, json=payload, timeout=config.get("timeout_seconds", 30))
+    assert response.status_code == 200, f"API request failed: {response.text}"
+
+    # Parse the response
+    data = response.json()
+    pred_label = data.get("label", "unknown").lower()
+    assert isinstance(pred_label, str)
 
     # Compute per-sample metrics
     y_true = [true_label.lower()]

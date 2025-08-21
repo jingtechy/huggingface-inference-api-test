@@ -2,63 +2,65 @@ name: CI - Hugging Face Inference API Tests
 
 on:
   push:
-    branches: [ main, 'feature/*' ]
+    branches:
+      - '**'
   pull_request:
-    branches: [ main ]
+    branches:
+      - '**'
 
 jobs:
-  test:
+  build-test-report:
     runs-on: ubuntu-latest
-
-    env:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    services:
+      docker:
+        image: docker:24.0.2-dind
+        options: --privileged --dns 8.8.8.8
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Cache pip
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+      # Setup Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
+      # Build both app and test images and start the test container
+      # - name: Build images and run tests
+        # run: docker compose up --build --exit-code-from test test
 
-      - name: Install dependencies
+      - name: Prepare reports directory
+        run: mkdir -p reports
+
+      # Build test image only and run tests in test container
+      - name: Build test image and run tests
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      
-      - name: Run pytest (fast feedback)
-        if: github.event_name == 'push'
-        run: mkdir -p reports && pytest --maxfail=1 --disable-warnings -q --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
+          docker compose build test
+          docker compose up --abort-on-container-exit test 
 
-      - name: Run pytest (full run)
-        if: github.event_name == 'pull_request'
-        run: mkdir -p reports && pytest --disable-warnings -q --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
+      # Clean up Docker resources
+      - name: Clean up Docker
+        run: docker system prune -af    
 
-      - name: Upload pytest HTML report 
+      # Upload JUnit test report
+      - name: Upload JUnit test report
         uses: actions/upload-artifact@v4
         with:
-          name: pytest-report
-          path: reports/report.html
-
-      - name: Upload junit xml (artifact)
-        uses: actions/upload-artifact@v4
-        with:
-          name: junit-xml
+          name: junit-report
           path: reports/junit.xml
 
-      - name: Upload summary markdown
+      # Upload HTML test report
+      - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
-          name: summary-markdown
+          name: html-report
+          path: reports/report.html
+
+      # Upload Markdown summary reports
+      - name: Upload Markdown reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: markdown-reports
           path: |
             reports/summary_qa.md
             reports/summary_sa.md

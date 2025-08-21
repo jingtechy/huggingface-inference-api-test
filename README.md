@@ -125,11 +125,23 @@ After the workflow completes, you can download artifacts directly from the **Git
    source .venv/bin/activate
    pip install -r requirements.txt
    ```
-4. Run tests:
+4. Launch FastAPI App
+   ```bash
+   uvicorn app:app --reload --host 0.0.0.0 --port 8000 
+   ``` 
+5. View built-in UI Interface of FastAPI:
+   ```bash
+   http://localhost:8000/docs 
+   ```  
+   Or
+    ```bash
+   http://localhost:8000/redoc
+   ``` 
+6. Run tests:
    ```bash
    pytest 
    ```
-5. View results:
+7. View results:
    - Open `reports/report.html` for the HTML report
    - Check `reports/summary.md` for the Markdown summary
    - API outputs are saved in `artifacts/`

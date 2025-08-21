@@ -36,23 +36,20 @@ services:
        
        # Wait until FastAPI responds
        for i in {1..20}; do
-         curl -s http://localhost:8000/health && break
+         curl -s http://localhost:8000/docs && break
          echo 'Waiting for FastAPI...'
          sleep 1
        done
 
        # If still not ready, exit with error
-       if ! curl -s http://localhost:8000/health; then
+       if ! curl -s http://localhost:8000/docs; then
          echo 'FastAPI did not start!'
          exit 1
        fi
 
        # Run tests
-        pytest --disable-warnings -q \
-          --junitxml=reports/junit.xml \
-          --html=reports/report.html \
-          --self-contained-html
-      "
+       pytest --disable-warnings -q --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
+     "
     environment:
       - PYTHONUNBUFFERED=1
     volumes:

@@ -1,8 +1,9 @@
 # Stage 1: Base image with dependencies
 FROM python:3.11-slim AS base
 
-# Install curl and netcat for readiness checks
-RUN apt-get update && apt-get install -y curl netcat && rm -rf /var/lib/apt/lists/*
+# Install curl for readiness checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 # Set working directory
 WORKDIR /app
 # Copy dependencies and install

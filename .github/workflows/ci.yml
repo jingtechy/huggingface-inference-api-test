@@ -15,29 +15,51 @@ jobs:
       docker:
         image: docker:24.0.2-dind
         options: --privileged --dns 8.8.8.8
+
     steps:
+      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Setup Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and run tests
-        run: |
-          docker-compose up --build --exit-code-from test test
+      # Build both app and test images and start the test container
+      - name: Build images and run tests
+        run: docker compose up --build --exit-code-from test test
 
+      # Copy test reports from test container
+      - name: Copy test reports
+        run: |
+          mkdir -p reports
+          TEST_CONTAINER_ID=$(docker compose ps -q test)
+          if [ -n "$TEST_CONTAINER_ID" ]; then
+            docker cp $TEST_CONTAINER_ID:/app/reports ./reports
+          else
+            echo "Test container not found!"
+            exit 1
+            fi
+
+      # Clean up Docker resources
+      - name: Clean up Docker
+        run: docker system prune -af    
+
+      # Upload JUnit test report
       - name: Upload JUnit test report
         uses: actions/upload-artifact@v4
         with:
           name: junit-report
           path: reports/junit.xml
 
+      # Upload HTML test report
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
           name: html-report
           path: reports/report.html
 
+      # Upload Markdown summary reports
       - name: Upload Markdown reports
         uses: actions/upload-artifact@v4
         with:

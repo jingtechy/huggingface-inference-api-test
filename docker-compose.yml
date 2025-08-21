@@ -1,22 +1,31 @@
 version: '3.8'
 services:
+  # FastAPI app container
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: app      # Use Dockerfile app stage
     container_name: huggingface-inference-api
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
     environment:
       - PYTHONUNBUFFERED=1
-    # Use healthcheck if you need to wait for API to start before testing
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health" ]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 10s
       timeout: 5s
       retries: 5
+    # Mount local project code in dev mode
+    # volumes:
+    #   - .:/app
+
+  # Test container
   test:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test   # Use Dockerfile test stage
     container_name: huggingface-inference-api-test
     depends_on:
       app:
@@ -26,7 +35,8 @@ services:
              --junitxml=reports/junit.xml
              --html=reports/report.html
              --self-contained-html
-    volumes:
-      - .:/app
     environment:
       - PYTHONUNBUFFERED=1
+    # volumes:
+    #   - .:/app   # Mount local project code
+    #   - ./test_data:/app/test_data  # Mount test data separately

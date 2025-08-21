@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and run tests
         run: |
-          docker-compose up --build --exit-code-from test test
+          docker compose up --build --exit-code-from test test
 
       - name: Upload JUnit test report
         uses: actions/upload-artifact@v4

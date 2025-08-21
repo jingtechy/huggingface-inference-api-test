@@ -49,14 +49,15 @@ services:
 
        # Run tests
         pytest --disable-warnings -q \
-               --junitxml=reports/junit.xml \
-               --html=reports/report.html \
-               --self-contained-html
+          --junitxml=reports/junit.xml \
+          --html=reports/report.html \
+          --self-contained-html
       "
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
       - .:/app   # Mount local project code directly from repo, so no need FastAPI app container/image
-      - ./test_data:/app/test_data  # Mount test data separately
+      - ./test_data:/app/test_data  # Mount test_data folder separately
+      - ./reports:/app/reports  # Mount reports folder separately
     ports:
       - "8000:8000"  # Optional: expose FastAPI port if needed  

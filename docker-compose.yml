@@ -31,12 +31,21 @@ services:
       #app:
         #condition: service_healthy
     command: >
-      /bin/bash -c "
-      # Start FastAPI in the background
-      uvicorn app.main:app --host 0.0.0.0 --port 8000 &
-      # Wait until FastAPI is ready
-      while ! nc -z localhost 8000; do sleep 0.5; done
-        # Run tests
+     bash -c "
+       # Start FastAPI in the background
+       uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+
+       # Wait until FastAPI responds to HTTP requests
+       for i in {1..20}; do
+         curl -s http://localhost:8000/health && break
+         echo 'Waiting for FastAPI...'
+         sleep 1
+       done
+
+       # Fail if FastAPI never started
+       curl -s http://localhost:8000/health > /dev/null || { echo 'FastAPI did not start!'; exit 1; }
+       
+       # Run tests
         pytest --disable-warnings -q \
                --junitxml=reports/junit.xml \
                --html=reports/report.html \

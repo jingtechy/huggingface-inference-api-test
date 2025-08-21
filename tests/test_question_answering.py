@@ -6,6 +6,7 @@ import os
 import pathlib
 import random
 import re
+import requests
 from typing import Dict, Any, List, Tuple
 
 import pytest
@@ -112,7 +113,7 @@ def evaluate_response(prediction: str, expected_answers: List[str], is_impossibl
 def test_question_answering(config: Dict[str, Any], artifacts_dir: pathlib.Path, qa_pair: Tuple[str, str,List[str], bool]) -> None:
     context, question, expected_answers, is_impossible = qa_pair
     
-    # Load local .env if exists
+    """ # Load local .env if exists
     env_path = pathlib.Path(".env")
     if env_path.exists():
         load_dotenv(dotenv_path=env_path)
@@ -134,11 +135,32 @@ def test_question_answering(config: Dict[str, Any], artifacts_dir: pathlib.Path,
     
     # question_answering() calls the Hugging Face Inference API to answer the question based on the context
     # It sends an HTTP request to the model and returns the AI-generated response
-    result = client.question_answering(model=config["model1"], question=question, context=context)
-    raw_output = result.answer if isinstance(result, dict) else ""
-    output = raw_output if isinstance(raw_output, str) else str(raw_output) # Make sure output always return a (or empty) string
+    response = client.question_answering(model=config["model1"], question=question, context=context) 
+
+    raw_output = response.answer if isinstance(response, dict) else ""
+    output = raw_output if isinstance(raw_output, str) else str(raw_output) # Make sure output always return a (or empty) string """
+
+
+    # FastAPI local URL
+    base_url = config.get("local_api_url", "http://localhost:8000")
+    qa_url = f"{base_url}/predict/qa"
+    
+    # Build request
+    payload = {
+        "question": question,
+        "context": context
+    }
+    
+    # Send Post request to FastAPI Question Answering API
+    response = requests.post(qa_url, json=payload, timeout=config.get("timeout_seconds", 30))
+    assert response.status_code == 200, f"API request failed: {response.text}"
+
+    data = response.json()
+    raw_output = data.get("answer", "")
+    output = raw_output if isinstance(raw_output, str) else str(raw_output)  # 确保返回字符串
     
     assert isinstance(output, str)
+
     # Evaluate the response
     evaluation_results = evaluate_response(output, expected_answers, is_impossible)
 

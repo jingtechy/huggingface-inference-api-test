@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: huggingface-inference-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Use healthcheck if you need to wait for API to start before testing
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  test:
+    build: .
+    container_name: huggingface-inference-api-test
+    depends_on:
+      app:
+        condition: service_healthy
+    command: >
+      pytest --disable-warnings -q
+             --junitxml=reports/junit.xml
+             --html=reports/report.html
+             --self-contained-html
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1

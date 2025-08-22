@@ -1,12 +1,15 @@
 name: CI - Hugging Face Inference API Tests
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
-      - '**'
+      - 'main'
   pull_request:
     branches:
-      - '**'
+      - 'main'
 
 jobs:
   build-test-report:
@@ -25,12 +28,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Build both app and test images and start the test container
+      # Build both apiapp and test images and start the test container
       # - name: Build images and run tests
         # run: docker compose up --build --exit-code-from test test
 
-      - name: Prepare reports directory
-        run: mkdir -p reports
+      #- name: Prepare reports directory
+        #run: mkdir -p reports
 
       # Build test image only and run tests in test container
       - name: Build test image and run tests
@@ -64,3 +67,13 @@ jobs:
           path: |
             reports/summary_qa.md
             reports/summary_sa.md
+      
+      - name: Commit and push reports to repo
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update test reports [skip ci]"
+          commit_user_name: "github-actions"
+          commit_user_email: "github-actions@users.noreply.github"
+          branch: main         # default branch
+          file_pattern: reports/**
+          

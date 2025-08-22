@@ -15,3 +15,5 @@ timeout_seconds: 60
 # Output directories
 artifact_dir: artifacts
 report_dir: reports
+
+local_api_url: http://localhost:8000

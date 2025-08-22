@@ -25,7 +25,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Build both app and test images and start the test container
+      # Build both apiapp and test images and start the test container
       # - name: Build images and run tests
         # run: docker compose up --build --exit-code-from test test
 

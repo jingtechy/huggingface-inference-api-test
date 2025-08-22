@@ -45,7 +45,7 @@ def load_test_inputs() -> List[Tuple[str, str]]:
             if not {"Sentence", "Sentiment"}.issubset(df.columns):
                 raise ValueError("CSV must have columns: sentence, sentiment")
             # Pick a random sample of 3 rows
-            sample = df.sample(min(3, len(df)))
+            sample = df.sample(min(10, len(df)))
             return list(zip(sample["Sentence"].tolist(), sample["Sentiment"].tolist()))
 
 

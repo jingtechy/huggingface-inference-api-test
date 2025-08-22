@@ -111,11 +111,11 @@ After the workflow completes, you can download artifacts directly from the **Git
      ```bash
      export HF_TOKEN=hf_xxx_your_token_here
      ```
-   - Windows PowerShell
+   - Windows PowerShell:
      ```bash
      $env:HF_TOKEN="hf_xxx_your_token_here"
      ```
-2. Install Python 3.11 using Homebrew  
+2. Install Python 3.11 using Homebrew:  
      ```bash
      brew install python@3.11
      ```   
@@ -125,9 +125,9 @@ After the workflow completes, you can download artifacts directly from the **Git
    source .venv/bin/activate
    pip install -r requirements.txt
    ```
-4. Launch FastAPI App
+4. Launch FastAPI app:
    ```bash
-   uvicorn app:app --reload --host 0.0.0.0 --port 8000 
+   uvicorn apiapp:app --reload --host 0.0.0.0 --port 8000 
    ``` 
 5. View built-in UI Interface of FastAPI:
    ```bash
@@ -143,8 +143,22 @@ After the workflow completes, you can download artifacts directly from the **Git
    ```
 7. View results:
    - Open `reports/report.html` for the HTML report
-   - Check `reports/summary.md` for the Markdown summary
+   - Check `reports/summary_qa.md`, `reports/summary_sa.md` for the Markdown summary reports
    - API outputs are saved in `artifacts/`
+
+8. Install Streamlit:
+   ```bash
+   source .venv/bin/activate  
+   pip install streamlit 
+   ```
+9. Launch Streamlit dashboard app:
+   ```bash
+   streamlit run streamlitapp.py --server.port 8501 
+   ```  
+10. View Streamlit dashboard:
+    ```bash
+    http://localhost:8501/
+    ```    
 
 ## 📊 Test Reports
 

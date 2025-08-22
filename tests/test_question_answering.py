@@ -53,7 +53,7 @@ def load_test_inputs() -> List[Tuple[str, List[str]]]:
 
     # If we have valid QA pairs, pick 2 randomly; otherwise use fallback 
     if qa_pairs:
-        return random.sample(qa_pairs, k=min(2, len(qa_pairs)))   
+        return random.sample(qa_pairs, k=min(10, len(qa_pairs)))   
     else:   
         return fallback_inputs                 
 

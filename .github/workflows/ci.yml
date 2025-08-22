@@ -76,4 +76,5 @@ jobs:
           commit_user_email: "github-actions@users.noreply.github"
           branch: main         # default branch
           file_pattern: reports/**
+          force: true
           

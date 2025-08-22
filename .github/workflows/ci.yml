@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     branches:
-      - '**'
+      - 'main'
   pull_request:
     branches:
       - 'main'
@@ -76,5 +76,4 @@ jobs:
           commit_user_email: "github-actions@users.noreply.github"
           branch: main         # default branch
           file_pattern: reports/**
-          force: true
           

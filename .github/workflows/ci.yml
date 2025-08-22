@@ -29,8 +29,8 @@ jobs:
       # - name: Build images and run tests
         # run: docker compose up --build --exit-code-from test test
 
-      - name: Prepare reports directory
-        run: mkdir -p reports
+      #- name: Prepare reports directory
+        #run: mkdir -p reports
 
       # Build test image only and run tests in test container
       - name: Build test image and run tests

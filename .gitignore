@@ -210,7 +210,7 @@ __marimo__/
 artifacts/
 
 # Ignore generated test reports
-reports/
+# reports/
 
 # macOS
 .DS_Store

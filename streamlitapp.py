@@ -6,7 +6,12 @@ import html
 import altair as alt
 
 # --- Set wide layout ---
-st.set_page_config(page_title="NLP Model Test Reports", layout="wide")
+st.set_page_config(
+    page_title="Hugging Face Models Evaluation Dashboard",  # shows in browser tab
+    page_icon="🤗",                                         # emoji or path to an image file
+    layout="wide",                                          # "centered" or "wide"
+    initial_sidebar_state="expanded"                        # or "collapsed"
+)
 
 # --- Utility functions ---
 def plot_metrics(chart_df):
@@ -93,10 +98,13 @@ qa_text = qa_path.read_text(encoding="utf-8") if qa_path.exists() else ""
 sa_text = sa_path.read_text(encoding="utf-8") if sa_path.exists() else ""
 
 # --- Streamlit UI ---
-st.title("📊 NLP Model Test Reports Dashboard")
+st.title("📊 Hugging Face Models Evaluation Dashboard")
 
-st.sidebar.title("Reports")
-report_choice = st.sidebar.radio("Select Report", ("Question Answering", "Sentiment Analysis"))
+st.sidebar.header("Reports")
+report_choice = st.sidebar.radio(
+    "Select Report", ("Question Answering", "Sentiment Analysis"),
+    help="Choose which evaluation report to explore"
+    )
 
 if report_choice == "Question Answering" and qa_text:
     st.header("Question Answering Report")

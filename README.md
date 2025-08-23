@@ -146,19 +146,14 @@ After the workflow completes, you can download artifacts directly from the **Git
    - Check `reports/summary_qa.md`, `reports/summary_sa.md` for the Markdown summary reports
    - API outputs are saved in `artifacts/`
 
-8. Install Streamlit:
-   ```bash
-   source .venv/bin/activate  
-   pip install streamlit 
-   ```
-9. Launch Streamlit dashboard app:
+8. Launch Streamlit dashboard app:
    ```bash
    streamlit run streamlitapp.py --server.port 8501 
    ```  
-10. View Streamlit dashboard:
-    ```bash
-    http://localhost:8501/
-    ```    
+9. View Streamlit dashboard:
+   ```bash
+   http://localhost:8501/
+   ```    
 
 ## 📊 Test Reports
 

@@ -100,6 +100,16 @@ sa_text = sa_path.read_text(encoding="utf-8") if sa_path.exists() else ""
 # --- Streamlit UI ---
 st.title("📊 Hugging Face Models Evaluation Dashboard")
 
+import streamlit as st
+
+# Initialize session state
+if "refresh" not in st.session_state:
+    st.session_state.refresh = False
+
+# Button to trigger refresh
+if st.button("🔄 Refresh Dashboard"):
+    st.session_state.refresh = not st.session_state.refresh
+
 st.sidebar.header("Reports")
 report_choice = st.sidebar.radio(
     "Select Report", ("Question Answering", "Sentiment Analysis"),

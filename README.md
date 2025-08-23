@@ -1,13 +1,14 @@
-# Hugging Face Inference API Test
+# Hugging Face AI Models Evaluation Dashboard
 
-This project enables automated testing of AI models using the **Hugging Face Inference API**.  
-It supports running model predictions on benchmark datasets, evaluating performance with standard metrics (e.g., accuracy, precision, recall, F1-score, exact match), and generating detailed reports for analysis and comparison.
+This project demonstrates **automated evaluation of AI models from Hugging Face**, designed as part of an AI portfolio to showcase expertise in model benchmarking, performance analysis, and inference pipelines. 
+It allows you to systematically run model predictions on benchmark datasets, evaluating performance with standard metrics (e.g., accuracy, precision, recall, F1-score, exact match), and generating detailed reports for analysis and comparison.
 
 # 🚀 Features
 
-## 🔗 Automatic API Calls
-- Integrates directly with the **Hugging Face Inference API**.  
-- Supports multiple tasks:
+## 🔗 Hugging Face Model Evaluation
+- Exposes Hugging Face pretrained models as APIs using FastAPI. 
+- Supports local inference via the Transformers library.
+- Evaluate multiple models across standard AI tasks:
   - **Question Answering** → SQuAD-style data
   - **Sentiment Analysis** → financial domain data  
 - Configurable model selection via `config.yml` or `HF_TOKEN` environment variable.  
@@ -41,7 +42,25 @@ Evaluation is performed with task-appropriate metrics:
   - **HTML Report** → `reports/report.html`
   - **JUnit XML Report** → `reports/junit.xml`
   - **Markdown Summaries** → `reports/summary_qa.md`, `reports/summary_sa.md`  
-- Reports include **per-sample evaluations** (perdictions with metrics) and **summary statistics** across the dataset.  
+- Reports include **per-sample evaluations** (perdictions with metrics) and **summary statistics** across the dataset. 
+
+## FastAPI + Containerization
+- **FastAPI App:**  
+  - The pretrained AI model is wrapped with FastAPI, exposing a REST API endpoint at `POST /predict`.
+- **Dockerized Deployment:**  
+  - The service is containerized using a `Dockerfile`.
+  - A `docker-compose.yml` configuration is provided for easy setup and orchestration.
+- **CI Integration:**  
+  - The GitHub Actions workflow builds and runs the Docker image.
+  - The FastAPI application is launched inside the test container.
+  - Automated tests are executed within the same container for consistency and isolation.
+
+## Streamlit Dashboard + Visualization
+- **Streamlit App:**  
+  - A Streamlit dashboard visualizes test reports and evaluation metrics.
+- **Live Report Updates:**  
+  - The CI workflow pushes newly generated test reports to the `main` branch.
+  - The Streamlit app always reflects the latest test data by pulling updated reports from the repository in real time.
 
 ## ⚙️ Configuration & Extensibility
 - Easily configurable via `config.yml` and environment variables.  
@@ -52,47 +71,40 @@ Evaluation is performed with task-appropriate metrics:
   - Define custom evaluation metrics  
 
 ## Continuous Integration (CI)
-
-This project includes a **GitHub Actions CI workflow** to automatically test Hugging Face inference API integrations.  
-The workflow ensures code quality and reliability by running tests on every **push** and **pull request**.
+This project uses a **GitHub Actions CI workflow** that runs all tests inside Docker containers for reproducibility and isolation.  
+The workflow builds the test image, runs the test suite, and automatically uploads and commits reports.
 
 ### Workflow Status
 
 ![CI Status](https://github.com/jingtechy/huggingface-inference-api-test/actions/workflows/ci.yml/badge.svg)
 
 ### 🔄 Workflow Triggers
-- **Push events** on:
-  - `main`
-  - `feature/*`
+- **Push events** on all branches
 - **Pull requests** targeting `main`
 
-### 🛠️ Job: `test`
-Runs on **Ubuntu (latest)** with the following steps:
+### 🛠️ Job: `build-test-report`
+Runs on **Ubuntu (latest)** with Docker-in-Docker enabled. Steps include:
 
 1. **Checkout Repository**
-   - Uses [`actions/checkout`](https://github.com/actions/checkout) to clone the repository into the runner.
+   - Uses [`actions/checkout`](https://github.com/actions/checkout) to clone the repository.
 
-2. **Cache Python Dependencies**
-   - Uses [`actions/cache`](https://github.com/actions/cache) to speed up installs by caching `~/.cache/pip`.
+2. **Set up Docker Buildx**
+   - Uses [`docker/setup-buildx-action`](https://github.com/docker/setup-buildx-action) for advanced Docker builds.
 
-3. **Set up Python 3.11**
-   - Uses [`actions/setup-python`](https://github.com/actions/setup-python) to install Python 3.11.
+3. **Build and Run Test Container**
+   - Builds the `test` image via Docker Compose.
+   - Runs all tests inside the container (`docker compose up --abort-on-container-exit test`).
 
-4. **Install Dependencies**
-   - Upgrades `pip` and installs requirements from `requirements.txt`.
+4. **Clean up Docker Resources**
+   - Removes unused Docker resources to keep the runner clean.
 
-5. **Run Tests with Pytest**
-   - **Push events** → Runs tests in *fast feedback mode* (stops after 1 failure).
-   - **Pull requests** → Runs the *full test suite*.
-   - Generates:
-     - **JUnit XML report**
-     - **HTML test report**
+5. **Upload Artifacts**
+   - **JUnit XML report** → `reports/junit.xml`
+   - **HTML test report** → `reports/report.html`
+   - **Markdown summaries** → `reports/summary_qa.md`, `reports/summary_sa.md`
 
-6. **Upload Artifacts**
-   - Test results are uploaded as GitHub Action artifacts:
-     - ✅ `pytest-report` → HTML test report
-     - 📄 `junit-xml` → JUnit XML results (useful for CI integrations)
-     - 📝 `summary-markdown` → Markdown summaries (e.g., `summary_qa.md`, `summary_sa.md`)
+6. **Commit and Push Reports**
+   - Automatically commits updated reports in the `reports/` directory back to the `main` branch.
 
 ### 🔐 Environment Variables
 - **`HF_TOKEN`**: Required Hugging Face access token (stored securely in GitHub Secrets).
@@ -156,7 +168,6 @@ After the workflow completes, you can download artifacts directly from the **Git
    ```    
 
 ## 📊 Test Reports
-
 - **HTML Report:**
 
 ![HTML Report](images/html_report.png)

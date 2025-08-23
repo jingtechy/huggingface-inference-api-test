@@ -1,19 +1,19 @@
-# Question Answering Test Summary — 2025-08-23T10:14:21
+# Question Answering Test Summary — 2025-08-23T12:52:44
 ## Summary Statistics
 - **Total Tests**: 10
-- **Average Exact Match**: 0.300
-- **Average F1 Score**: 0.313
+- **Average Exact Match**: 0.400
+- **Average F1 Score**: 0.533
 
 ## Detailed Results
 | Model | Task | Unanswerable | Input | Expected Answers | Output | Exact Match | F1 Score |
 |---|---|---|---|---|---|---|---|
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;does&nbsp;the&nbsp;U.S.&nbsp;economic​and&nbsp;social&nbsp;model&nbsp;have&nbsp;substantial​levels&nbsp;of? | social&nbsp;exclusion,&nbsp;social&nbsp;exclusion,&nbsp;social​exclusion | social&nbsp;exclusion | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | Commensal&nbsp;flora&nbsp;can&nbsp;change&nbsp;what​specific&nbsp;conditions&nbsp;of&nbsp;their&nbsp;environment​in&nbsp;the&nbsp;gastrointestinal&nbsp;tract? | ph&nbsp;or&nbsp;available&nbsp;iron,&nbsp;ph​or&nbsp;available&nbsp;iron,&nbsp;balance&nbsp;of​microbial&nbsp;populations | pH&nbsp;or&nbsp;available&nbsp;iron | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;period&nbsp;did&nbsp;plates&nbsp;reverse​directions&nbsp;to&nbsp;compress&nbsp;the&nbsp;Tethys​floor? | jurassic&nbsp;period,&nbsp;jurassic&nbsp;period,&nbsp;jurassic​period | Jurassic&nbsp;Period | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;river&nbsp;does&nbsp;Berlin&nbsp;straddle? |  | Vistula&nbsp;River | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | True | How&nbsp;long&nbsp;can&nbsp;the&nbsp;cillia​grow&nbsp;on&nbsp;ctenophores? |  | 1.5&nbsp;meters&nbsp;(4.9&nbsp;ft) | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;charter&nbsp;has&nbsp;not&nbsp;become​an&nbsp;improtant&nbsp;aspect&nbsp;of&nbsp;Eu​law? |  | the&nbsp;Charter&nbsp;of&nbsp;Fundamental&nbsp;Rights​of&nbsp;the&nbsp;European&nbsp;Union | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | True | Who&nbsp;published&nbsp;an&nbsp;error&nbsp;regarding​the&nbsp;Himalayan&nbsp;glaciers? |  | Martin&nbsp;Parry | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | In&nbsp;what&nbsp;type&nbsp;of&nbsp;molecules​are&nbsp;oxygen&nbsp;found? | biomolecules,&nbsp;biomolecules,&nbsp;biomolecules,&nbsp;biomolecules,&nbsp;almost​all&nbsp;biomolecules&nbsp;… | biologically&nbsp;important&nbsp;energy-carrying&nbsp;molecules | 0.000 | 0.133 |
-| deepset/roberta-base-squad2 | question_answering | True | When&nbsp;did&nbsp;the&nbsp;Jip&nbsp;dynasty​end? |  | Yuan&nbsp;dynasty | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | True | Tymnet&nbsp;worked&nbsp;with&nbsp;what? |  | dozens&nbsp;of&nbsp;other&nbsp;public&nbsp;networks | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Who&nbsp;identified&nbsp;gravity&nbsp;as&nbsp;a​force? | isaac&nbsp;newton,&nbsp;isaac&nbsp;newton,&nbsp;isaac​newton,&nbsp;isaac&nbsp;newton | Isaac&nbsp;Newton | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | The&nbsp;Amazon&nbsp;region&nbsp;is&nbsp;home​to&nbsp;how&nbsp;many&nbsp;species&nbsp;of​insect? | 2.5&nbsp;million,&nbsp;about&nbsp;2.5&nbsp;million,​2.5&nbsp;million | 2.5&nbsp;million | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | True | King&nbsp;Sigimund's&nbsp;Column&nbsp;is&nbsp;an​example&nbsp;of&nbsp;what&nbsp;kind&nbsp;of​attraction&nbsp;in&nbsp;UNESCO? |  | architectural | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | How&nbsp;is&nbsp;the&nbsp;prime&nbsp;number​p&nbsp;in&nbsp;Bertrand's&nbsp;postulate&nbsp;expressed​mathematically? | n&nbsp;<&nbsp;p&nbsp;<&nbsp;2n​−&nbsp;2,&nbsp;n&nbsp;<&nbsp;p​<&nbsp;2n&nbsp;−&nbsp;2,&nbsp;a​or&nbsp;μ,&nbsp;n&nbsp;<&nbsp;p​<&nbsp;2n&nbsp;−&nbsp;2,&nbsp;n​<&nbsp;p&nbsp;<&nbsp;2n&nbsp;−​2 | at&nbsp;least&nbsp;one&nbsp;prime&nbsp;number​p&nbsp;with&nbsp;n&nbsp;<&nbsp;p​<&nbsp;2n&nbsp;−&nbsp;2 | 0.000 | 0.533 |
+| deepset/roberta-base-squad2 | question_answering | False | Can&nbsp;the&nbsp;President&nbsp;of&nbsp;the​Council&nbsp;vote&nbsp;on&nbsp;important&nbsp;matters​related&nbsp;to&nbsp;the&nbsp;European&nbsp;Central​Bank? | do&nbsp;not&nbsp;have&nbsp;voting&nbsp;rights,​not,&nbsp;not,&nbsp;not | do&nbsp;not&nbsp;have&nbsp;voting&nbsp;rights | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Where&nbsp;was&nbsp;the&nbsp;Gate&nbsp;of​King&nbsp;Hugo? | tours,&nbsp;tours,&nbsp;tours | Huguon | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Which&nbsp;tribes&nbsp;did&nbsp;Genghis&nbsp;Khan​unite? | mongol&nbsp;and&nbsp;turkic&nbsp;tribes,&nbsp;mongol​and&nbsp;turkic&nbsp;tribes,&nbsp;the&nbsp;mongol​and&nbsp;turkic&nbsp;tribes | Mongol&nbsp;and&nbsp;Turkic&nbsp;tribes&nbsp;of​the&nbsp;steppes | 0.000 | 0.800 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;group&nbsp;operates&nbsp;St&nbsp;Dominic's​College&nbsp;in&nbsp;Wanganui? | society&nbsp;of&nbsp;st&nbsp;pius&nbsp;x,​the&nbsp;society&nbsp;of&nbsp;st&nbsp;pius​x,&nbsp;catholic&nbsp;schismatic | Society&nbsp;of&nbsp;St&nbsp;Pius&nbsp;X | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | True | Besides&nbsp;the&nbsp;study&nbsp;of&nbsp;prime​numbers,&nbsp;what&nbsp;general&nbsp;theory&nbsp;was​considered&nbsp;the&nbsp;official&nbsp;example&nbsp;of​the&nbsp;military? |  | number&nbsp;theory | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;did&nbsp;the&nbsp;agreement&nbsp;not​aim&nbsp;to&nbsp;do&nbsp;regarding&nbsp;Germany? |  | prevent&nbsp;Germany&nbsp;from&nbsp;re-establishing&nbsp;dominance​in&nbsp;the&nbsp;production&nbsp;of&nbsp;coal​and&nbsp;steel | 0.000 | 0.000 |

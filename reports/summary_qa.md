@@ -1,19 +1,19 @@
-# Question Answering Test Summary — 2025-08-23T12:52:44
+# Question Answering Test Summary — 2025-08-23T13:04:25
 ## Summary Statistics
 - **Total Tests**: 10
-- **Average Exact Match**: 0.400
-- **Average F1 Score**: 0.533
+- **Average Exact Match**: 0.600
+- **Average F1 Score**: 0.600
 
 ## Detailed Results
 | Model | Task | Unanswerable | Input | Expected Answers | Output | Exact Match | F1 Score |
 |---|---|---|---|---|---|---|---|
-| deepset/roberta-base-squad2 | question_answering | False | Who&nbsp;identified&nbsp;gravity&nbsp;as&nbsp;a​force? | isaac&nbsp;newton,&nbsp;isaac&nbsp;newton,&nbsp;isaac​newton,&nbsp;isaac&nbsp;newton | Isaac&nbsp;Newton | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | The&nbsp;Amazon&nbsp;region&nbsp;is&nbsp;home​to&nbsp;how&nbsp;many&nbsp;species&nbsp;of​insect? | 2.5&nbsp;million,&nbsp;about&nbsp;2.5&nbsp;million,​2.5&nbsp;million | 2.5&nbsp;million | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | King&nbsp;Sigimund's&nbsp;Column&nbsp;is&nbsp;an​example&nbsp;of&nbsp;what&nbsp;kind&nbsp;of​attraction&nbsp;in&nbsp;UNESCO? |  | architectural | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | How&nbsp;is&nbsp;the&nbsp;prime&nbsp;number​p&nbsp;in&nbsp;Bertrand's&nbsp;postulate&nbsp;expressed​mathematically? | n&nbsp;<&nbsp;p&nbsp;<&nbsp;2n​−&nbsp;2,&nbsp;n&nbsp;<&nbsp;p​<&nbsp;2n&nbsp;−&nbsp;2,&nbsp;a​or&nbsp;μ,&nbsp;n&nbsp;<&nbsp;p​<&nbsp;2n&nbsp;−&nbsp;2,&nbsp;n​<&nbsp;p&nbsp;<&nbsp;2n&nbsp;−​2 | at&nbsp;least&nbsp;one&nbsp;prime&nbsp;number​p&nbsp;with&nbsp;n&nbsp;<&nbsp;p​<&nbsp;2n&nbsp;−&nbsp;2 | 0.000 | 0.533 |
-| deepset/roberta-base-squad2 | question_answering | False | Can&nbsp;the&nbsp;President&nbsp;of&nbsp;the​Council&nbsp;vote&nbsp;on&nbsp;important&nbsp;matters​related&nbsp;to&nbsp;the&nbsp;European&nbsp;Central​Bank? | do&nbsp;not&nbsp;have&nbsp;voting&nbsp;rights,​not,&nbsp;not,&nbsp;not | do&nbsp;not&nbsp;have&nbsp;voting&nbsp;rights | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | Where&nbsp;was&nbsp;the&nbsp;Gate&nbsp;of​King&nbsp;Hugo? | tours,&nbsp;tours,&nbsp;tours | Huguon | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | Which&nbsp;tribes&nbsp;did&nbsp;Genghis&nbsp;Khan​unite? | mongol&nbsp;and&nbsp;turkic&nbsp;tribes,&nbsp;mongol​and&nbsp;turkic&nbsp;tribes,&nbsp;the&nbsp;mongol​and&nbsp;turkic&nbsp;tribes | Mongol&nbsp;and&nbsp;Turkic&nbsp;tribes&nbsp;of​the&nbsp;steppes | 0.000 | 0.800 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;group&nbsp;operates&nbsp;St&nbsp;Dominic's​College&nbsp;in&nbsp;Wanganui? | society&nbsp;of&nbsp;st&nbsp;pius&nbsp;x,​the&nbsp;society&nbsp;of&nbsp;st&nbsp;pius​x,&nbsp;catholic&nbsp;schismatic | Society&nbsp;of&nbsp;St&nbsp;Pius&nbsp;X | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | Besides&nbsp;the&nbsp;study&nbsp;of&nbsp;prime​numbers,&nbsp;what&nbsp;general&nbsp;theory&nbsp;was​considered&nbsp;the&nbsp;official&nbsp;example&nbsp;of​the&nbsp;military? |  | number&nbsp;theory | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;did&nbsp;the&nbsp;agreement&nbsp;not​aim&nbsp;to&nbsp;do&nbsp;regarding&nbsp;Germany? |  | prevent&nbsp;Germany&nbsp;from&nbsp;re-establishing&nbsp;dominance​in&nbsp;the&nbsp;production&nbsp;of&nbsp;coal​and&nbsp;steel | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | True | When&nbsp;did&nbsp;the&nbsp;North&nbsp;American​French&nbsp;and&nbsp;Indian&nbsp;War&nbsp;begin? |  | 10&nbsp;February&nbsp;1763 | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;did&nbsp;the&nbsp;Taliban&nbsp;want​to&nbsp;subject&nbsp;the&nbsp;entire&nbsp;country​to? | sharia,&nbsp;an&nbsp;idealized&nbsp;and&nbsp;systematized​version&nbsp;of&nbsp;conservative&nbsp;tribal&nbsp;village​cus… | Sharia | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;change&nbsp;in&nbsp;conditions&nbsp;may​make&nbsp;the&nbsp;Amazon&nbsp;rainforest&nbsp;unsustainable? | reduced&nbsp;rainfall&nbsp;and&nbsp;increased&nbsp;temperatures,​severely&nbsp;reduced&nbsp;rainfall&nbsp;and&nbsp;incre… | severely&nbsp;reduced&nbsp;rainfall&nbsp;and&nbsp;increased​temperatures | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;was&nbsp;the&nbsp;name&nbsp;of​the&nbsp;imperialistic&nbsp;policy&nbsp;in&nbsp;China? | open&nbsp;door&nbsp;policy,&nbsp;open&nbsp;door​policy,&nbsp;open&nbsp;door&nbsp;policy,&nbsp;open​door&nbsp;policy,&nbsp;open&nbsp;doo… | Open&nbsp;Door&nbsp;Policy | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;is&nbsp;a&nbsp;secondary&nbsp;duty​of&nbsp;the&nbsp;GPhC? |  | manage&nbsp;the&nbsp;pharmacy&nbsp;department&nbsp;and​specialised&nbsp;areas&nbsp;in&nbsp;pharmacy&nbsp;practice | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Which&nbsp;car&nbsp;shows&nbsp;the&nbsp;DOT's​revision&nbsp;of&nbsp;categories? | mustang&nbsp;i,&nbsp;the&nbsp;1974&nbsp;mustang​i,&nbsp;mustang&nbsp;i,&nbsp;1974&nbsp;mustang​i,&nbsp;1974&nbsp;mustang&nbsp;i | 1974&nbsp;Mustang&nbsp;I | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;is&nbsp;another&nbsp;word&nbsp;for​the&nbsp;study&nbsp;of&nbsp;past&nbsp;and​current&nbsp;life? |  | biogeochemical&nbsp;pathways | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Where&nbsp;are&nbsp;a&nbsp;bulk&nbsp;of​factories&nbsp;concentrated&nbsp;along&nbsp;the&nbsp;Rhine? | switzerland,&nbsp;lower&nbsp;rhine,&nbsp;lower&nbsp;rhine | the&nbsp;Lower&nbsp;Rhine | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | True | How&nbsp;are&nbsp;the&nbsp;largest&nbsp;global​firms&nbsp;picked&nbsp;for&nbsp;the&nbsp;Top-40​list? |  | Top-250 | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;did&nbsp;Mongols&nbsp;worship? | the&nbsp;eternal&nbsp;heaven,&nbsp;eternal&nbsp;heaven,​the&nbsp;eternal&nbsp;heaven | the&nbsp;Eternal&nbsp;Heaven | 1.000 | 1.000 |

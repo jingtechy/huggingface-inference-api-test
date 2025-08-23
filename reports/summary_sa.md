@@ -1,21 +1,21 @@
-# Sentiment Analysis Test Summary — 2025-08-22T12:31:08
+# Sentiment Analysis Test Summary — 2025-08-23T10:14:21
 ## Summary Statistics
 - **Total Tests**: 10
-- **Average Accuracy**: 0.500
-- **Average Precision**: 0.500
-- **Average Recall**: 0.500
-- **Average F1 Score**: 0.500
+- **Average Accuracy**: 0.100
+- **Average Precision**: 0.100
+- **Average Recall**: 0.100
+- **Average F1 Score**: 0.100
 
 ## Detailed Results
 | Model | Task | Input | Expected | Output | Accuracy | Precision | Recall | F1 Score |
 |---|---|---|---|---|---|---|---|---|
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | ``&nbsp;While&nbsp;concerns&nbsp;remain&nbsp;longer​term&nbsp;,&nbsp;size&nbsp;and&nbsp;scale​may&nbsp;enable&nbsp;Nokia&nbsp;to&nbsp;hold​on&nbsp;to&nbsp;its&nbsp;newfound&nbsp;ma… | positive | positive | 1.000 | 1.000 | 1.000 | 1.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | The&nbsp;airline&nbsp;was&nbsp;targeting&nbsp;travel​agents&nbsp;,&nbsp;tour&nbsp;operators&nbsp;and​travel&nbsp;management&nbsp;companies&nbsp;to&nbsp;raise​aw… | neutral | negative | 0.000 | 0.000 | 0.000 | 0.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | The&nbsp;Department&nbsp;Store&nbsp;Division&nbsp;reported​an&nbsp;increase&nbsp;in&nbsp;sales&nbsp;of​4&nbsp;per&nbsp;cent&nbsp;. | positive | positive | 1.000 | 1.000 | 1.000 | 1.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Its&nbsp;main&nbsp;business&nbsp;area&nbsp;,​the&nbsp;Glass&nbsp;Machinery&nbsp;Group&nbsp;of​Glaston&nbsp;Technologies&nbsp;,&nbsp;is&nbsp;the​global&nbsp;market&nbsp;le… | positive | positive | 1.000 | 1.000 | 1.000 | 1.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | It&nbsp;now&nbsp;owns&nbsp;80,565&nbsp;shares​in&nbsp;Amer&nbsp;Sports&nbsp;Corporation&nbsp;,​equaling&nbsp;0.11&nbsp;%&nbsp;of&nbsp;the​company&nbsp;'s&nbsp;share&nbsp;capit… | neutral | positive | 0.000 | 0.000 | 0.000 | 0.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Boomeranger&nbsp;Boats&nbsp;Oy&nbsp;specialises&nbsp;in​boat&nbsp;building&nbsp;and&nbsp;designs&nbsp;,​manufactures&nbsp;and&nbsp;sells&nbsp;customised&nbsp;Ri… | neutral | positive | 0.000 | 0.000 | 0.000 | 0.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | L&T&nbsp;'s&nbsp;net&nbsp;profit&nbsp;for​the&nbsp;whole&nbsp;2010&nbsp;dropped&nbsp;to​EUR&nbsp;36&nbsp;million&nbsp;from&nbsp;EUR​45&nbsp;million&nbsp;for&nbsp;2009&nbsp;. | negative | negative | 1.000 | 1.000 | 1.000 | 1.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Capacity&nbsp;will&nbsp;ease&nbsp;at&nbsp;its​Seikku&nbsp;sawmill&nbsp;in&nbsp;Pori&nbsp;and​Alholma&nbsp;sawmill&nbsp;in&nbsp;Pietarsaari&nbsp;and​result&nbsp;in&nbsp;60… | negative | negative | 1.000 | 1.000 | 1.000 | 1.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Temporary&nbsp;lay-offs&nbsp;,&nbsp;affecting&nbsp;the​entire&nbsp;workforce&nbsp;,&nbsp;will&nbsp;also​be&nbsp;implemented&nbsp;. | negative | positive | 0.000 | 0.000 | 0.000 | 0.000 |
-| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | 55&nbsp;workers&nbsp;in&nbsp;+àm+Ñl&nbsp;will​be&nbsp;affected&nbsp;by&nbsp;the&nbsp;close-down​. | neutral | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | These&nbsp;share&nbsp;transactions&nbsp;are&nbsp;part​of&nbsp;the&nbsp;company&nbsp;'s&nbsp;strategy​of&nbsp;relinquishing&nbsp;assets&nbsp;that&nbsp;are​not&nbsp;pa… | neutral | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | AUSTIN&nbsp;,&nbsp;Texas&nbsp;,&nbsp;Sept.​6&nbsp;--&nbsp;Texas&nbsp;Department&nbsp;Of​Transportation&nbsp;awards&nbsp;contract&nbsp;for&nbsp;Teleste​Video&nbsp;Com… | positive | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Tielinja&nbsp;generated&nbsp;net&nbsp;sales&nbsp;of​7.5&nbsp;mln&nbsp;euro&nbsp;$&nbsp;9.6​mln&nbsp;in&nbsp;2005&nbsp;. | neutral | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | $CIEN&nbsp;http://stks.co/dZU&nbsp;CIEN&nbsp;seems&nbsp;to​have&nbsp;broken&nbsp;out&nbsp;of&nbsp;a​major&nbsp;horizontal&nbsp;resistance.&nbsp;Targets&nbsp;$14… | positive | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | ``&nbsp;Printed&nbsp;fabrics&nbsp;and&nbsp;related​design&nbsp;expertise&nbsp;have&nbsp;always&nbsp;been​the&nbsp;core&nbsp;of&nbsp;Marimekko&nbsp;'s​business&nbsp;a… | neutral | positive | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | The&nbsp;method&nbsp;utilises&nbsp;waterborne&nbsp;Ultra​products&nbsp;,&nbsp;giving&nbsp;protection&nbsp;to​wooden&nbsp;surfaces&nbsp;in&nbsp;an&nbsp;industria… | neutral | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Airvana&nbsp;'s&nbsp;UMTS&nbsp;Home&nbsp;Base​Station&nbsp;femto&nbsp;cell&nbsp;uses&nbsp;software-based​functionality&nbsp;and&nbsp;off-the-shelf&nbsp;sil… | positive | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Kone&nbsp;shares&nbsp;dropped&nbsp;4.1&nbsp;percent​to&nbsp;x20ac&nbsp;43&nbsp;US$&nbsp;55.77​in&nbsp;Helsinki&nbsp;. | neutral | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | ASSA&nbsp;ABLOY&nbsp;Kaupthing&nbsp;Bank&nbsp;gave​a&nbsp;`&nbsp;neutral&nbsp;'&nbsp;recommendation​and&nbsp;a&nbsp;share&nbsp;price&nbsp;target​of&nbsp;174&nbsp;crowns&nbsp;$… | neutral | negative | 0.000 | 0.000 | 0.000 | 0.000 |
+| distilbert/distilbert-base-uncased-finetuned-sst-2-english | sentiment_analysis | Nine&nbsp;banks&nbsp;including&nbsp;Barclays,&nbsp;Citi,​agree&nbsp;to&nbsp;pay&nbsp;$2&nbsp;billion​to&nbsp;settle&nbsp;forex&nbsp;... | negative | negative | 1.000 | 1.000 | 1.000 | 1.000 |

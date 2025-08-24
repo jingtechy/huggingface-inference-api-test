@@ -1,13 +1,20 @@
-# Hugging Face Inference API Test
+# Hugging Face AI Models Evaluation Dashboard
 
-This project enables automated testing of AI models using the **Hugging Face Inference API**.  
-It supports running model predictions on benchmark datasets, evaluating performance with standard metrics (e.g., accuracy, precision, recall, F1-score, exact match), and generating detailed reports for analysis and comparison.
+This project demonstrates **automated evaluation of AI models from Hugging Face**, developed as part of an AI portfolio.
+
+It showcases expertise in building an end-to-end automated workflow that takes raw input data, processes it, runs it through pre-trained Hugging Face models wrapped with FastAPI, generates predictions and evaluation metrics, and produces comprehensive reports. The entire workflow is containerized with Docker and integrated into a pipeline for seamless automation.
+
+The results are available for exploration on a public Streamlit dashboard.
+([link](https://huggingface-model-evaluation.streamlit.app/)) 
+
+![Streamlit Dashboard](images/streamlit.gif)
 
 # 🚀 Features
 
-## 🔗 Automatic API Calls
-- Integrates directly with the **Hugging Face Inference API**.  
-- Supports multiple tasks:
+## 🔗 Hugging Face Model Evaluation
+- Exposes Hugging Face pretrained models as APIs using FastAPI. 
+- Supports local inference via the Transformers library.
+- Evaluate multiple models across standard AI tasks:
   - **Question Answering** → SQuAD-style data
   - **Sentiment Analysis** → financial domain data  
 - Configurable model selection via `config.yml` or `HF_TOKEN` environment variable.  
@@ -22,32 +29,6 @@ It supports running model predictions on benchmark datasets, evaluating performa
   - Dataset: **Financial Sentiment Analysis** from Kaggle ([link](https://www.kaggle.com/datasets/sbhatti/financial-sentiment-analysis))  
   - Labeled examples for **positive**, **negative**, and **neutral** financial sentiment.  
 
----
-
-## FastAPI + Containerization
-
-- **FastAPI Service:**  
-  - The pretrained AI model is wrapped with FastAPI, exposing a REST API endpoint at `POST /predict`.
-- **Dockerized Deployment:**  
-  - The service is containerized using a `Dockerfile`.
-  - A `docker-compose.yml` configuration is provided for easy setup and orchestration.
-- **CI Integration:**  
-  - The GitHub Actions workflow builds and runs the Docker image.
-  - The FastAPI application is launched inside the test container.
-  - Automated tests are executed within the same container for consistency and isolation.
-
----
-
-## Streamlit Dashboard + Visualization
-
-- **Streamlit App:**  
-  - A Streamlit dashboard visualizes test reports and evaluation metrics.
-- **Live Report Updates:**  
-  - The CI workflow pushes newly generated test reports to the `main` branch.
-  - The Streamlit app always reflects the latest test data by pulling updated reports from the repository in real time.
-
----
-
 ## 📊 Model Evaluation
 Evaluation is performed with task-appropriate metrics:
 
@@ -61,13 +42,41 @@ Evaluation is performed with task-appropriate metrics:
   - **Recall** → proportion of actual positives correctly identified  
   - **F1 Score** → harmonic mean of precision and recall  
 
+## FastAPI + Containerization
+- **FastAPI App:**  
+  - The pretrained AI model is wrapped with FastAPI, exposing a REST API endpoint at `POST /predict`.
+
+  ![FastAPI](images/fastapi.png)
+- **Dockerized Deployment:**  
+  - The service is containerized using a `Dockerfile`.
+  - A `docker-compose.yml` configuration is provided for easy setup and orchestration.
+- **CI Integration:**  
+  - The GitHub Actions workflow builds and runs the Docker image.
+  - The FastAPI application is launched inside the test container.
+  - Automated tests are executed within the same container for consistency and isolation.  
+
 ## 📝 Custom Reports
 - Saves all model outputs in `artifacts/` for reproducibility.  
 - Generates detailed reports:
   - **HTML Report** → `reports/report.html`
+
+  ![HTML Report](images/html_report.png)
+
   - **JUnit XML Report** → `reports/junit.xml`
+
   - **Markdown Summaries** → `reports/summary_qa.md`, `reports/summary_sa.md`  
-- Reports include **per-sample evaluations** (perdictions with metrics) and **summary statistics** across the dataset.  
+
+  ![Question Answering](images/summary_qa.png) 
+
+  ![Sentiment Analysis](images/summary_sa.png)
+- Reports include **per-sample evaluations** (perdictions with metrics) and **summary statistics** across the dataset. 
+
+## Streamlit Dashboard + Visualization
+- **Streamlit App:**  
+  - A Streamlit dashboard visualizes test reports and evaluation metrics.
+- **Live Report Updates:**  
+  - The CI workflow pushes newly generated test reports to the `main` branch.
+  - The Streamlit app always reflects the latest test data by pulling updated reports from the repository in real time.
 
 ## ⚙️ Configuration & Extensibility
 - Easily configurable via `config.yml` and environment variables.  
@@ -78,12 +87,12 @@ Evaluation is performed with task-appropriate metrics:
   - Define custom evaluation metrics  
 
 ## Continuous Integration (CI)
-
 This project uses a **GitHub Actions CI workflow** that runs all tests inside Docker containers for reproducibility and isolation.  
 The workflow builds the test image, runs the test suite, and automatically uploads and commits reports.
 
-### Workflow Status
+![GitHub Actions Workflow](images/workflow.png)
 
+### Workflow Status
 ![CI Status](https://github.com/jingtechy/huggingface-inference-api-test/actions/workflows/ci.yml/badge.svg)
 
 ### 🔄 Workflow Triggers
@@ -174,24 +183,4 @@ After the workflow completes, you can download artifacts directly from the **Git
    ```bash
    http://localhost:8501/
    ```    
-
-## 📊 Test and Evaluation Reports
-
-- **HTML Report:**
-
-![HTML Report](images/html_report.png)
-
-- **Markdown Summary Report:** 
-
-![Question Answering](images/summary_qa.png)
-
-![Sentiment Analysis](images/summary_sa.png)
-
-- **Streamlit Dashboard:**  
-  The Streamlit dashboard provides interactive visualization of the latest test results and metrics.  
-  ![Streamlit Dashboard](images/streamlit.gif)
-
-- **GitHub Actions Workflow:**  
-  The CI workflow status and steps can be viewed directly in GitHub Actions.  
-  ![GitHub Actions Workflow](images/workflow.png)
-
+       

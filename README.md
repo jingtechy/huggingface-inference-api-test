@@ -1,7 +1,11 @@
 # Hugging Face AI Models Evaluation Dashboard
 
-This project demonstrates **automated evaluation of AI models from Hugging Face**, designed as part of an AI portfolio to showcase expertise in model benchmarking, performance analysis, and inference pipelines. 
-It allows you to systematically run model predictions on benchmark datasets, evaluating performance with standard metrics (e.g., accuracy, precision, recall, F1-score, exact match), and generating detailed reports for analysis and comparison.
+This project demonstrates **automated evaluation of AI models from Hugging Face**, developed as part of an AI portfolio.
+
+It showcases expertise in building an end-to-end automated workflow that takes raw input data, processes it, runs it through pre-trained Hugging Face models wrapped with FastAPI, generates predictions and evaluation metrics, and produces comprehensive reports. The entire workflow is containerized with Docker and integrated into a pipeline for seamless automation.
+
+The results are available for exploration on a public Streamlit dashboard.
+([link](https://huggingface-model-evaluation.streamlit.app/))  
 
 # 🚀 Features
 
@@ -36,14 +40,6 @@ Evaluation is performed with task-appropriate metrics:
   - **Recall** → proportion of actual positives correctly identified  
   - **F1 Score** → harmonic mean of precision and recall  
 
-## 📝 Custom Reports
-- Saves all model outputs in `artifacts/` for reproducibility.  
-- Generates detailed reports:
-  - **HTML Report** → `reports/report.html`
-  - **JUnit XML Report** → `reports/junit.xml`
-  - **Markdown Summaries** → `reports/summary_qa.md`, `reports/summary_sa.md`  
-- Reports include **per-sample evaluations** (perdictions with metrics) and **summary statistics** across the dataset. 
-
 ## FastAPI + Containerization
 - **FastAPI App:**  
   - The pretrained AI model is wrapped with FastAPI, exposing a REST API endpoint at `POST /predict`.
@@ -53,7 +49,15 @@ Evaluation is performed with task-appropriate metrics:
 - **CI Integration:**  
   - The GitHub Actions workflow builds and runs the Docker image.
   - The FastAPI application is launched inside the test container.
-  - Automated tests are executed within the same container for consistency and isolation.
+  - Automated tests are executed within the same container for consistency and isolation.  
+
+## 📝 Custom Reports
+- Saves all model outputs in `artifacts/` for reproducibility.  
+- Generates detailed reports:
+  - **HTML Report** → `reports/report.html`
+  - **JUnit XML Report** → `reports/junit.xml`
+  - **Markdown Summaries** → `reports/summary_qa.md`, `reports/summary_sa.md`  
+- Reports include **per-sample evaluations** (perdictions with metrics) and **summary statistics** across the dataset. 
 
 ## Streamlit Dashboard + Visualization
 - **Streamlit App:**  

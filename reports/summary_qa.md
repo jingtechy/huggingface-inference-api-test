@@ -1,19 +1,19 @@
-# Question Answering Test Summary — 2025-08-23T13:04:25
+# Question Answering Test Summary — 2025-08-24T04:03:02
 ## Summary Statistics
 - **Total Tests**: 10
-- **Average Exact Match**: 0.600
-- **Average F1 Score**: 0.600
+- **Average Exact Match**: 0.400
+- **Average F1 Score**: 0.429
 
 ## Detailed Results
 | Model | Task | Unanswerable | Input | Expected Answers | Output | Exact Match | F1 Score |
 |---|---|---|---|---|---|---|---|
-| deepset/roberta-base-squad2 | question_answering | True | When&nbsp;did&nbsp;the&nbsp;North&nbsp;American​French&nbsp;and&nbsp;Indian&nbsp;War&nbsp;begin? |  | 10&nbsp;February&nbsp;1763 | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;did&nbsp;the&nbsp;Taliban&nbsp;want​to&nbsp;subject&nbsp;the&nbsp;entire&nbsp;country​to? | sharia,&nbsp;an&nbsp;idealized&nbsp;and&nbsp;systematized​version&nbsp;of&nbsp;conservative&nbsp;tribal&nbsp;village​cus… | Sharia | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;change&nbsp;in&nbsp;conditions&nbsp;may​make&nbsp;the&nbsp;Amazon&nbsp;rainforest&nbsp;unsustainable? | reduced&nbsp;rainfall&nbsp;and&nbsp;increased&nbsp;temperatures,​severely&nbsp;reduced&nbsp;rainfall&nbsp;and&nbsp;incre… | severely&nbsp;reduced&nbsp;rainfall&nbsp;and&nbsp;increased​temperatures | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;was&nbsp;the&nbsp;name&nbsp;of​the&nbsp;imperialistic&nbsp;policy&nbsp;in&nbsp;China? | open&nbsp;door&nbsp;policy,&nbsp;open&nbsp;door​policy,&nbsp;open&nbsp;door&nbsp;policy,&nbsp;open​door&nbsp;policy,&nbsp;open&nbsp;doo… | Open&nbsp;Door&nbsp;Policy | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;is&nbsp;a&nbsp;secondary&nbsp;duty​of&nbsp;the&nbsp;GPhC? |  | manage&nbsp;the&nbsp;pharmacy&nbsp;department&nbsp;and​specialised&nbsp;areas&nbsp;in&nbsp;pharmacy&nbsp;practice | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | Which&nbsp;car&nbsp;shows&nbsp;the&nbsp;DOT's​revision&nbsp;of&nbsp;categories? | mustang&nbsp;i,&nbsp;the&nbsp;1974&nbsp;mustang​i,&nbsp;mustang&nbsp;i,&nbsp;1974&nbsp;mustang​i,&nbsp;1974&nbsp;mustang&nbsp;i | 1974&nbsp;Mustang&nbsp;I | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;is&nbsp;another&nbsp;word&nbsp;for​the&nbsp;study&nbsp;of&nbsp;past&nbsp;and​current&nbsp;life? |  | biogeochemical&nbsp;pathways | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | Where&nbsp;are&nbsp;a&nbsp;bulk&nbsp;of​factories&nbsp;concentrated&nbsp;along&nbsp;the&nbsp;Rhine? | switzerland,&nbsp;lower&nbsp;rhine,&nbsp;lower&nbsp;rhine | the&nbsp;Lower&nbsp;Rhine | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | How&nbsp;are&nbsp;the&nbsp;largest&nbsp;global​firms&nbsp;picked&nbsp;for&nbsp;the&nbsp;Top-40​list? |  | Top-250 | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;did&nbsp;Mongols&nbsp;worship? | the&nbsp;eternal&nbsp;heaven,&nbsp;eternal&nbsp;heaven,​the&nbsp;eternal&nbsp;heaven | the&nbsp;Eternal&nbsp;Heaven | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | The&nbsp;presence&nbsp;or&nbsp;absence&nbsp;of​what&nbsp;can&nbsp;be&nbsp;used&nbsp;to​determine&nbsp;the&nbsp;relative&nbsp;age&nbsp;of​the&nbsp;formations&nbsp;in&nbsp;which&nbsp;they​are&nbsp;found? | organisms,&nbsp;organisms,&nbsp;organisms,&nbsp;organisms | fossils&nbsp;in&nbsp;sedimentary&nbsp;rocks.&nbsp;As​organisms | 0.000 | 0.286 |
+| deepset/roberta-base-squad2 | question_answering | True | Where&nbsp;did&nbsp;Ribault&nbsp;erect&nbsp;the​flag&nbsp;claiming&nbsp;the&nbsp;land&nbsp;for​France? |  | Jacksonville | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Who&nbsp;organized&nbsp;the&nbsp;trees&nbsp;of​the&nbsp;Amazon&nbsp;into&nbsp;four&nbsp;categories? | tatiana&nbsp;kuplich,&nbsp;tatiana&nbsp;kuplich,&nbsp;tatiana​kuplich | Tatiana&nbsp;Kuplich | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Where&nbsp;do&nbsp;other&nbsp;tourist&nbsp;events​happen&nbsp;in&nbsp;Victoria&nbsp;outside&nbsp;of​Melbourne? | regional&nbsp;cities,&nbsp;in&nbsp;regional&nbsp;cities,​phillip&nbsp;island | regional&nbsp;cities | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;is&nbsp;the&nbsp;shortened&nbsp;name​of&nbsp;the&nbsp;annual&nbsp;yacht&nbsp;race​that&nbsp;takes&nbsp;place? | transpac,&nbsp;transpac,&nbsp;transpac | Transpacific&nbsp;Yacht&nbsp;Race | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;came&nbsp;after&nbsp;this&nbsp;oil​crisis? |  | many&nbsp;short-&nbsp;and&nbsp;long-term&nbsp;effects​on&nbsp;global&nbsp;politics&nbsp;and&nbsp;the​global&nbsp;economy | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | True | A&nbsp;static&nbsp;equilibrium&nbsp;between&nbsp;three​sources&nbsp;is&nbsp;a&nbsp;way&nbsp;of​doing&nbsp;what? |  | measuring&nbsp;forces | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;are&nbsp;two&nbsp;of&nbsp;the​three&nbsp;major&nbsp;cities&nbsp;located&nbsp;in​southern&nbsp;California? |  | Los&nbsp;Angeles&nbsp;and&nbsp;San&nbsp;Diego | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;process&nbsp;is&nbsp;responsible&nbsp;for​the&nbsp;planet's&nbsp;oxygen&nbsp;content? | photosynthesis,&nbsp;photosynthesis,&nbsp;photosynthesis,&nbsp;photosynthesis,&nbsp;photosynthesis | photosynthesis | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;is&nbsp;the&nbsp;name&nbsp;of​the&nbsp;area&nbsp;past&nbsp;the&nbsp;border​that&nbsp;the&nbsp;megaregion&nbsp;extends&nbsp;into? | tijuana,&nbsp;tijuana,&nbsp;tijuana | Tijuana | 1.000 | 1.000 |

@@ -1,19 +1,19 @@
-# Question Answering Test Summary — 2025-08-24T11:55:57
+# Question Answering Test Summary — 2025-08-25T10:01:44
 ## Summary Statistics
 - **Total Tests**: 10
 - **Average Exact Match**: 0.500
-- **Average F1 Score**: 0.557
+- **Average F1 Score**: 0.540
 
 ## Detailed Results
 | Model | Task | Unanswerable | Input | Expected Answers | Output | Exact Match | F1 Score |
 |---|---|---|---|---|---|---|---|
-| deepset/roberta-base-squad2 | question_answering | False | In&nbsp;addition&nbsp;to&nbsp;recirculating&nbsp;water,​what&nbsp;do&nbsp;condensers&nbsp;do? | recover&nbsp;the&nbsp;latent&nbsp;heat&nbsp;of​vaporisation,&nbsp;recover&nbsp;the&nbsp;latent&nbsp;heat​of&nbsp;vaporisation… | recover&nbsp;the&nbsp;latent&nbsp;heat&nbsp;of​vaporisation | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | How&nbsp;was&nbsp;the&nbsp;Dutch&nbsp;name​for&nbsp;the&nbsp;Rhine&nbsp;originally&nbsp;spelled? | rhijn,&nbsp;rhijn,&nbsp;rhijn,&nbsp;rhijn,&nbsp;rhijn | Rijn | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | True | Which&nbsp;languages&nbsp;rejected&nbsp;the&nbsp;Phags-pa​script? |  | Mongolian,&nbsp;Tibetan,&nbsp;and&nbsp;Chinese | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | When&nbsp;did&nbsp;the&nbsp;name&nbsp;black​death&nbsp;officially&nbsp;take&nbsp;root&nbsp;in​England? | 1823,&nbsp;1823,&nbsp;1823 | 1823 | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | In&nbsp;what&nbsp;sort&nbsp;of&nbsp;places​are&nbsp;rivers&nbsp;used? |  | lakes | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | Other&nbsp;than&nbsp;warships,&nbsp;what&nbsp;ships​typically&nbsp;required&nbsp;high&nbsp;speeds? | ocean&nbsp;liners,&nbsp;ocean&nbsp;liners,&nbsp;ocean​liners | dreadnought&nbsp;battleships,&nbsp;and&nbsp;ocean&nbsp;liners | 0.000 | 0.571 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;was&nbsp;the&nbsp;goal&nbsp;of​congress? | formalize&nbsp;a&nbsp;unified&nbsp;front&nbsp;in​trade&nbsp;and&nbsp;negotiations&nbsp;with&nbsp;various​indians,&nbsp;since&nbsp;… | to&nbsp;formalize&nbsp;a&nbsp;unified&nbsp;front​in&nbsp;trade&nbsp;and&nbsp;negotiations&nbsp;with​various&nbsp;Indians | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | True | The&nbsp;residual&nbsp;of&nbsp;what&nbsp;can​be&nbsp;seen&nbsp;in&nbsp;front&nbsp;of​hadrons? |  | force&nbsp;that&nbsp;acts&nbsp;between&nbsp;nucleons​in&nbsp;atomic&nbsp;nuclei)&nbsp;as&nbsp;the​nuclear&nbsp;force | 0.000 | 0.000 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;movements&nbsp;pursued&nbsp;a&nbsp;more​radical&nbsp;direction? | fringe&nbsp;or&nbsp;splinter,&nbsp;fringe&nbsp;or​splinter&nbsp;movements,&nbsp;fringe | Fringe&nbsp;or&nbsp;splinter&nbsp;movements | 1.000 | 1.000 |
-| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;is&nbsp;the&nbsp;glacial&nbsp;alpine​valley&nbsp;known&nbsp;as? | rhine&nbsp;valley,&nbsp;rhine&nbsp;valley,&nbsp;rhine​valley,&nbsp;rhine&nbsp;valley,&nbsp;rhine&nbsp;valley | Rhine&nbsp;Valley | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;did&nbsp;Paul-Louis&nbsp;Simond&nbsp;establish​in&nbsp;1898? | the&nbsp;mechanism&nbsp;by&nbsp;which&nbsp;y.​pestis&nbsp;was&nbsp;usually&nbsp;transmitted,&nbsp;mechanism​by&nbsp;which&nbsp;y.&nbsp;… | Y.&nbsp;pestis | 0.000 | 0.400 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;did&nbsp;the&nbsp;UK&nbsp;parliment​decide&nbsp;that&nbsp;a&nbsp;subscription&nbsp;to​BSkyB&nbsp;was? |  | often&nbsp;damaging | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | How&nbsp;was&nbsp;the&nbsp;efficiency&nbsp;of​a&nbsp;steam&nbsp;engine&nbsp;typically&nbsp;evaluated? | duty,&nbsp;duty | "duty" | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Going&nbsp;to&nbsp;jail&nbsp;accomplished&nbsp;what​goal&nbsp;of&nbsp;civil&nbsp;disobedience? | reminding&nbsp;their&nbsp;countrymen&nbsp;of&nbsp;injustice,​reminding&nbsp;their&nbsp;countrymen&nbsp;of&nbsp;injustice… | reminding&nbsp;their&nbsp;countrymen&nbsp;of&nbsp;injustice | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | What&nbsp;was&nbsp;the&nbsp;North&nbsp;American​portion&nbsp;of&nbsp;War&nbsp;of&nbsp;Austrian​Succession? | king&nbsp;george's&nbsp;war,&nbsp;king&nbsp;george's​war,&nbsp;king&nbsp;george's&nbsp;war,&nbsp;king​george's&nbsp;war | King&nbsp;George's&nbsp;War | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;are&nbsp;two&nbsp;small&nbsp;car​models&nbsp;that&nbsp;didn't&nbsp;recover&nbsp;in​1974? |  | Chevrolet&nbsp;Bel&nbsp;Air,&nbsp;and&nbsp;Ford​Galaxie&nbsp;500 | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | True | What&nbsp;did&nbsp;planes&nbsp;and&nbsp;automobiles​have&nbsp;to&nbsp;divide&nbsp;separately? |  | certain&nbsp;roads | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | True | In&nbsp;what&nbsp;year&nbsp;did&nbsp;Rev.​Elie&nbsp;Prioleau&nbsp;become&nbsp;the&nbsp;pastor​of&nbsp;the&nbsp;first&nbsp;Huguenot&nbsp;church​in&nbsp;Charleston,&nbsp;South&nbsp;Carolina? |  | 1685 | 0.000 | 0.000 |
+| deepset/roberta-base-squad2 | question_answering | False | How&nbsp;many&nbsp;protestants&nbsp;live&nbsp;in​France&nbsp;today? | one&nbsp;million,&nbsp;approximately&nbsp;one&nbsp;million,​approximately&nbsp;one&nbsp;million | one&nbsp;million | 1.000 | 1.000 |
+| deepset/roberta-base-squad2 | question_answering | False | Which&nbsp;organization&nbsp;released&nbsp;a&nbsp;California​Earthquake&nbsp;forecast? | usgs,&nbsp;the&nbsp;usgs,&nbsp;usgs | USGS | 1.000 | 1.000 |

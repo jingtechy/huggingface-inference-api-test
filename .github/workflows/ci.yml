@@ -1,4 +1,4 @@
-name: CI - Hugging Face Inference API Tests
+name: CI - Hugging Face Model Evaluation
 
 permissions:
   contents: write
